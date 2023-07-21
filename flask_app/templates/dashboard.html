@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+
+</head>
+<body>
+    <nav class="nav">
+        <div>
+            <h1>Sandipani</h1>
+        </div>
+        <div>
+            <ul id="ul">
+                <li id="list_item">Home</li>
+                <li id="list_item">Sign up</li>
+            </ul>
+        </div>
+    </nav>
+    <!-- <h1>{{session['admin_id']}}</h1> -->
+
+    <div>
+        {% for member in all_members %}
+            <div class="main_row">
+                <div id="left_section">
+                    <p>{{member.first_name}}</p>
+                    <p>{{member.last_name}}</p>
+                </div>
+                <div id="right_section">
+                    <p>{{member.created_at}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

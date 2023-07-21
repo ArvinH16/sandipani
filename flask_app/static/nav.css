@@ -1,0 +1,25 @@
+/* The main index page */
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Nav styling */
+.nav {
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* the list in the nav for the items in the nav such as home and login etc */
+#ul {
+    display: flex;
+    list-style: none;
+}
+
+/* Each item in the list in the nav */
+#list_item {
+    margin: 0px 10px;
+}

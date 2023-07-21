@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
+
+</head>
+<body>
+    <nav class="nav">
+        <div>
+            <h1>Sandipani</h1>
+        </div>
+        <div>
+            <ul id="ul">
+                <li id="list_item">Home</li>
+                <li id="list_item">Sign up</li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <form action="/admin_login" method="post">
+            <div id="form_section">
+                <label for="email">Email:</label>
+                <input type="text" name="email" placeholder="email">
+            </div>
+            <div id="form_section">
+                <label for="password">Password:</label>
+                <input type="text" name="password" placeholder="password">
+            </div>
+
+            <input id="form_element" type="submit" value="Sign in">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/* The form elements */
+
+input {
+    display: block;
+}
+
+#form_section {
+    margin: 10px 0px;
+}

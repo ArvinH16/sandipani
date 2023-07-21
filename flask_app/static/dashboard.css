@@ -1,0 +1,15 @@
+.main_row {
+    border: 1px black solid;
+    height: 200px;
+    width: 600px;
+    display: flex;
+    margin: 10px;
+}
+
+/* #left_section {
+
+}
+
+#right_section {
+
+} */
