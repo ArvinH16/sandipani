@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
+
+</head>
+
+<body>
+    <nav class="nav">
+        <div>
+            <h1>Sandipani</h1>
+        </div>
+        <div>
+            <ul id="ul">
+                <li id="list_item">Home</li>
+                <li id="list_item"><a href="/new_member">Add member</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <div>
+            <form action="/add_member" method="post">
+                <label for="first_name">First name:</label>
+                <input type="text" name="first_name" placeholder="first name">
+
+                <label for="middle_name">Middle Name:</label>
+                <input type="text" name="middle_name" placeholder="middle name">
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" placeholder="last name">
+
+                <label for="email">Email:</label>
+                <input type="text" name="email" placeholder="email">
+
+                <label for="street_1">Street 1:</label>
+                <input type="text" name="street_1" placeholder="street 1">
+
+                <label for="street_2">Street 2:</label>
+                <input type="text" name="street_2" placeholder="street 2">
+
+                <label for="city">City:</label>
+                <input type="text" name="city" placeholder="city">
+
+                <label for="state">State:</label>
+                <input type="text" name="state" placeholder="state">
+
+                <label for="zip">Zip code:</label>
+                <input type="text" name="zip" placeholder="zip code">
+
+                <label for="country">Country</label>
+                <input type="text" name="country" placeholder="country">
+
+                <label for="spouse">Spouse:</label>
+                <input type="text" name="spouse" placeholder="spouse">
+
+                <label for="parents:">Parents:</label>
+                <input type="text" name="parents" placeholder="parents">
+
+                <label for="children">Children:</label>
+                <input type="text" name="children" placeholder="children">
+
+                <label for="phone_1">Phone 1:</label>
+                <input type="text" name="phone_1" placeholder="phone 1">
+
+                <label for="phone_2">Phone 2:</label>
+                <input type="text" name="phone_2" placeholder="phone 2">
+
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes" placeholder="notes">
+
+                <label for="email_list">Email list:</label>
+                <select name="email_list">
+                    <option value="option_1">Option 1</option>
+                    <option value="option_2">Option 2</option>
+                    <option value="option_3">Option 3</option>
+                </select>
+
+                <input type="submit" value="Add member!">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-from flask_app.controllers import index, admins
+from flask_app.controllers import index, admins, members
 from flask_app import app
 
 

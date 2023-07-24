@@ -1,15 +1,39 @@
 .main_row {
     border: 1px black solid;
-    height: 200px;
-    width: 600px;
+    height: 30px;
+    width: 80%;
     display: flex;
-    margin: 10px;
+    margin: 5px auto;
+    padding: 3px;
+    text-align: center;
+    border-radius: 5px;
 }
 
-/* #left_section {
 
+#left_section {
+    flex: 3;
+    border-right: 1px black solid;
+    padding-right: 2px;
+    margin: auto 0px;
+}
+
+#middle_section {
+    flex: 4;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: auto 0px;
 }
 
 #right_section {
+    flex: 2;
+    border-left: 1px black solid;
+    padding-left: 2px;
+    margin: auto 0px;
+}
 
-} */
+#button {
+    flex: 0.75;
+    border-left: 1px black solid;
+    margin: auto 0px;
+}
+
