@@ -31,5 +31,5 @@ def view_member(member_id):
 def edit_member():
     
     member_edited = Member.edit_member(request.form)
-
+    #tested
     return redirect("/main_page")
