@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new_member_page.css') }}">
+
+</head>
+<body>
+    <nav class="nav">
+        <div>
+            <h1>Sandipani</h1>
+        </div>
+        <div>
+            <ul id="ul">
+                <li id="list_item"><a href="/main_page">Home</a></li>
+                <li id="list_item"><a href="/new_member">Add Member</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <form action="/edit_member" method="post">
+            <div class="form_element">
+
+                <input type="hidden" name="member_id" value="{{member.id}}">
+
+                <label for="first_name">First name:</label>
+                <input type="text" name="first_name" value="{{member.first_name}}" required>
+            
+                <label for="middle_name">Middle Name:</label>
+                <input type="text" name="middle_name" value="{{member.middle_name}}">
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" value="{{member.last_name}}" required>
+            </div>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" name="email" value="{{member.email}}">
+
+                <label for="street_1">Street 1:</label>
+                <input type="text" name="street_1" value="{{member.street_1}}">
+
+                <label for="street_2">Street 2:</label>
+                <input type="text" name="street_2" value="{{member.street_2}}">
+            </div>
+
+            <div>
+                <label for="city">City:</label>
+                <input type="text" name="city" value="{{member.city}}">
+
+                <label for="state">State:</label>
+                <input type="text" name="state" value="{{member.state}}">
+
+                <label for="zip">Zip code:</label>
+                <input type="text" name="zip" value="{{member.zip}}">
+            </div>
+
+            <div>
+                <label for="country">Country:</label>
+                <input type="text" name="country" value="{{member.country}}">
+
+                <label for="spouse">Spouse:</label>
+                <input type="text" name="spouse" value="{{member.spouse}}">
+
+                <label for="parents:">Parents:</label>
+                <input type="text" name="parents" value="{{member.parents}}">
+            </div>
+
+            <div>
+                <label for="children">Children:</label>
+                <input type="text" name="children" value="{{member.children}}">
+
+                <label for="phone_1">Phone 1:</label>
+                <input type="text" name="phone_1" value="{{member.phone_1}}">
+
+                <label for="phone_2">Phone 2:</label>
+                <input type="text" name="phone_2" value="{{member.phone_2}}">
+            </div>
+
+            <div>
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes" value="{{member.notes}}">
+
+
+                <label for="email_list">Email list:</label>
+                
+                
+                <label id="em_lab" for="option1">None:</label>
+                <input type="checkbox" id="option1"
+                name="option1" value="None">
+
+                <label id="em_lab" for="option2">Yajmans:</label>
+                <input type="checkbox" id="option2"
+                name="option2" value="Yajmans">
+
+                <label id="em_lab" for="option3">General Contact:</label>
+                <input type="checkbox" id="option3"
+                name="option3" value="General Contact">
+
+                <label id="em_lab" for="option4">Education:</label>
+                <input type="checkbox" id="option4"
+                name="option4" value="Education">
+
+            </div>
+
+            <input type="submit" value="Add member!">
+        </form>
+    </div>
+</body>
+</html>

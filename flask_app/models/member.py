@@ -48,5 +48,16 @@ class Member:
 
         return result
 
+    @classmethod
+    def get_member(cls, data):
+        query = "SELECT * FROM members WHERE id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        return cls(result[0])
+
+    @classmethod
+    def edit_member(cls, data):
+        query = "UPDATE members SET first_name = %(first_name)s, middle_name = %(middle_name)s, last_name = %(last_name)s, email = %(email)s, street_1 = %(street_1)s, street_2 = %(street_2)s, city = %(city)s, state = %(state)s, zip = %(zip)s, country = %(country)s, spouse = %(spouse)s, parents = %(parents)s, children = %(children)s, phone_1 = %(phone_1)s, phone_2 = %(phone_2)s, notes = %(notes)s WHERE id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        return result
     
 
