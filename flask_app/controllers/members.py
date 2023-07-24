@@ -18,3 +18,18 @@ def add_member():
 
     return redirect("/main_page")
 
+@app.route("/view_member/<int:member_id>")
+def view_member(member_id):
+    data_member = {
+        "member_id": member_id
+    }
+    member = Member.get_member(data_member)
+    
+    return render_template("view_member.html", member = member)
+
+@app.route("/edit_member", methods=["POST"])
+def edit_member():
+    
+    member_edited = Member.edit_member(request.form)
+
+    return redirect("/main_page")
