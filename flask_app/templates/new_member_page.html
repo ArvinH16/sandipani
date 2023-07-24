@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new_member_page.css') }}">
 
 </head>
-
 <body>
     <nav class="nav">
         <div>
@@ -16,8 +16,8 @@
         </div>
         <div>
             <ul id="ul">
-                <li id="list_item">Home</li>
-                <li id="list_item"><a href="/new_member">Add member</a></li>
+                <li id="list_item"><a href="/main_page">Home</a></li>
+                <li id="list_item"><a href="/new_member">Add Member</a></li>
             </ul>
         </div>
     </nav>
@@ -25,65 +25,89 @@
     <div>
         <div>
             <form action="/add_member" method="post">
-                <label for="first_name">First name:</label>
-                <input type="text" name="first_name" placeholder="first name">
+                <div class="form_element">
+                    <label for="first_name">First name:</label>
+                    <input type="text" name="first_name" placeholder="first name" required>
+                
+                    <label for="middle_name">Middle Name:</label>
+                    <input type="text" name="middle_name" placeholder="middle name">
 
-                <label for="middle_name">Middle Name:</label>
-                <input type="text" name="middle_name" placeholder="middle name">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" placeholder="last name" required>
+                </div>
 
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" placeholder="last name">
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" placeholder="email">
 
-                <label for="email">Email:</label>
-                <input type="text" name="email" placeholder="email">
+                    <label for="street_1">Street 1:</label>
+                    <input type="text" name="street_1" placeholder="street 1">
 
-                <label for="street_1">Street 1:</label>
-                <input type="text" name="street_1" placeholder="street 1">
+                    <label for="street_2">Street 2:</label>
+                    <input type="text" name="street_2" placeholder="street 2">
+                </div>
 
-                <label for="street_2">Street 2:</label>
-                <input type="text" name="street_2" placeholder="street 2">
+                <div>
+                    <label for="city">City:</label>
+                    <input type="text" name="city" placeholder="city">
 
-                <label for="city">City:</label>
-                <input type="text" name="city" placeholder="city">
+                    <label for="state">State:</label>
+                    <input type="text" name="state" placeholder="state">
 
-                <label for="state">State:</label>
-                <input type="text" name="state" placeholder="state">
+                    <label for="zip">Zip code:</label>
+                    <input type="text" name="zip" placeholder="zip code">
+                </div>
 
-                <label for="zip">Zip code:</label>
-                <input type="text" name="zip" placeholder="zip code">
+                <div>
+                    <label for="country">Country:</label>
+                    <input type="text" name="country" placeholder="country">
 
-                <label for="country">Country</label>
-                <input type="text" name="country" placeholder="country">
+                    <label for="spouse">Spouse:</label>
+                    <input type="text" name="spouse" placeholder="spouse">
 
-                <label for="spouse">Spouse:</label>
-                <input type="text" name="spouse" placeholder="spouse">
+                    <label for="parents:">Parents:</label>
+                    <input type="text" name="parents" placeholder="parents">
+                </div>
 
-                <label for="parents:">Parents:</label>
-                <input type="text" name="parents" placeholder="parents">
+                <div>
+                    <label for="children">Children:</label>
+                    <input type="text" name="children" placeholder="children">
 
-                <label for="children">Children:</label>
-                <input type="text" name="children" placeholder="children">
+                    <label for="phone_1">Phone 1:</label>
+                    <input type="text" name="phone_1" placeholder="phone 1">
 
-                <label for="phone_1">Phone 1:</label>
-                <input type="text" name="phone_1" placeholder="phone 1">
+                    <label for="phone_2">Phone 2:</label>
+                    <input type="text" name="phone_2" placeholder="phone 2">
+                </div>
 
-                <label for="phone_2">Phone 2:</label>
-                <input type="text" name="phone_2" placeholder="phone 2">
+                <div>
+                    <label for="notes">Notes:</label>
+                    <input type="text" name="notes" placeholder="notes">
 
-                <label for="notes">Notes:</label>
-                <input type="text" name="notes" placeholder="notes">
 
-                <label for="email_list">Email list:</label>
-                <select name="email_list">
-                    <option value="option_1">Option 1</option>
-                    <option value="option_2">Option 2</option>
-                    <option value="option_3">Option 3</option>
-                </select>
+                    <label for="email_list">Email list:</label>
+                    
+                    
+                    <label id="em_lab" for="option1">None:</label>
+                    <input type="checkbox" id="option1"
+                    name="option1" value="None">
+
+                    <label id="em_lab" for="option2">Yajmans:</label>
+                    <input type="checkbox" id="option2"
+                    name="option2" value="Yajmans">
+
+                    <label id="em_lab" for="option3">General Contact:</label>
+                    <input type="checkbox" id="option3"
+                    name="option3" value="General Contact">
+
+                    <label id="em_lab" for="option4">Education:</label>
+                    <input type="checkbox" id="option4"
+                    name="option4" value="Education">
+
+                </div>
 
                 <input type="submit" value="Add member!">
             </form>
+
         </div>
     </div>
-</body>
-
-</html>

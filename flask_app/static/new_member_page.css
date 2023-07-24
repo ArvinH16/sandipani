@@ -1,0 +1,48 @@
+
+label {
+    color: black;
+    font-size: large;
+    font-weight: 600;
+}
+
+input[type=submit] {
+    width: 10%;
+    padding: 12px;
+    cursor: pointer;
+    font-size: large;
+    font-weight: 600;
+    border-radius: 5px;
+    
+}
+
+input[type=checkbox] {
+    margin-right: 10px;
+}
+
+input[type=text] {
+    width: 25%;
+    padding: 12px 10px;
+    margin: 10px 0px;
+    margin-right: 20px;
+   box-sizing: border-box;
+    border: 2px solid   grey;
+    border-radius: 4px;
+}
+
+input[type=text]:focus {
+    background-color: lightgray;
+  }
+
+form {
+   margin-top: 25px;
+    text-align: center;
+    
+}
+
+body {
+    background-color: #ffca69;
+}
+
+#em_lab {
+    font-weight: 400;
+}

@@ -18,7 +18,6 @@
     display: flex;
     list-style: none;
     font-weight: bold;
-    
 }
 
 /* Each item in the list in the nav */
@@ -26,8 +25,8 @@
     margin: 0px 10px;
 }
 
-
 #list_item > a {
     text-decoration: none;
     color: black;
 }
+

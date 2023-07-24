@@ -1,39 +1,40 @@
 .main_row {
+    margin: 5px auto;
     border: 1px black solid;
     height: 30px;
     width: 80%;
     display: flex;
-    margin: 5px auto;
     padding: 3px;
     text-align: center;
+
     border-radius: 5px;
 }
 
-
 #left_section {
+    margin: auto 0px;
     flex: 3;
     border-right: 1px black solid;
     padding-right: 2px;
-    margin: auto 0px;
+
 }
 
 #middle_section {
+    margin: auto 0px;
     flex: 4;
     padding-left: 2px;
     padding-right: 2px;
-    margin: auto 0px;
+
 }
 
-#right_section {
-    flex: 2;
-    border-left: 1px black solid;
-    padding-left: 2px;
+#right_section {    
     margin: auto 0px;
+    flex: 2;
+    padding-left: 2px;
+    border-left: 1px black solid;
 }
 
 #button {
+    margin: auto 0px;
     flex: 0.75;
     border-left: 1px black solid;
-    margin: auto 0px;
 }
-

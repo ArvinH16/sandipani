@@ -15,35 +15,43 @@
         </div>
         <div>
             <ul id="ul">
-                <li id="list_item">Home</li>
-                <li id="list_item"><a href="/new_member">Add member</a></li>
+                <li id="list_item"><a href="/main_page">Home</a></li>
+                <li id="list_item"><a href="/new_member">Add Member</a></li>
             </ul>
         </div>
     </nav>
-    <!-- <h1>{{session['admin_id']}}</h1> -->
-    <div>
-        <div class="search_bar">
-            
-        </div>
 
-        <div class="member_container">
+    <div class="search_bar">
+        <form action="/search_member" method="get">
+            <input type="text" name="query" placeholder="Search...">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    
+    <div class="member_container">
+        <div>
             {% for member in all_members %}
                 <div class="main_row">
                     <div id="left_section">
                         <p>{{member.first_name}} {{member.last_name}}</p>
                     </div>
+    
                     <div id="middle_section">
                         <p>{{member.email}}</p>
                     </div>
+                    
                     <div id="right_section">
                         <p>{{member.city}}</p>
                     </div>
+
                     <div id="button">
-                        <button>View</button>
+                        <button type="button">View</button>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+
+    
 </body>
 </html>
