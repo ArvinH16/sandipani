@@ -24,6 +24,13 @@
 
     <div>
         <form action="/organizer_login" method="post">
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p> {{message}} </p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <div id="form_section">
                 <label for="email">Email:</label>
                 <input type="text" name="email" placeholder="email">

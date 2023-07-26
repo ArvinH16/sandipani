@@ -38,4 +38,32 @@ class Organizer:
 
         return result
 
+    @staticmethod
+    def sign_up_validation(data):
+        is_valid = True
+
+        query = "SELECT * FROM organizers WHERE email = %(email)s"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        if len(result) >= 1:
+            flash("Email is already taken", "sign_up")
+            is_valid = False
+
+        if not EMAIL_REGEX.match(data['email']):
+            flash("Invalid email. Please enter a valid email", 'sign_up')
+            is_valid = False
+        
+        if data['password'] != data['pass_confirm']:
+            flash("Passwords do not match", "sign_up")
+            is_valid = False
+
+        if len(data['password']) < 6:
+            flash("passowrds needs to be at least 6 characters long", "sign_up")
+            is_valid = False
+
+        return is_valid
+
+
+
+
+
     
