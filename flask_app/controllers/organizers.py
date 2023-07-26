@@ -18,10 +18,11 @@ def login():
 
     organizer = Organizer.check_email(data)
     if not organizer:
+        flash("Invalid email", "login")
         return redirect('/')
     
     if not bcrypt.check_password_hash(organizer.password, data['password']):
-        #flash("Invalid Password", "login")
+        flash("Invalid Password", "login")
         return redirect('/')
 
     session['organizer_id'] = organizer.id
@@ -36,22 +37,26 @@ def sign_up():
 @app.route("/organizer_sign_up", methods=["POST"])
 def add_organizer():
 
+    if not Organizer.sigh_up_validation(request.form):
+        return redirect("/sign_up")
+
+
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+
     data = {
         "first_name": request.form['first_name'],
         "last_name" : request.form['last_name'],
         "phone_number" : request.form['phone_number'],
         "email" : request.form['email'],
-        "password" : request.form['password'],
+        "password" : pw_hash,
         "description" : request.form['description'],
-        "role" : request.form['role']
+        "role" : "none"
     }
-    pw_hash = bcrypt.generate_password_hash(request.form['password'])
     
     organizer = Organizer.add_organizer(data)
 
     return redirect("/pending_page")
 
-    
 
 @app.route("/main_page")
 def dashboard():

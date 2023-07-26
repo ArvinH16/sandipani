@@ -24,6 +24,14 @@
 
     <div>
         <form action="/organizer_sign_up" method="post">
+            {% with messages = get_flashed_messages(category_filter=['sign_up']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p> {{message}} </p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
             <div id="form_section">
                 <label for="first_name">First Name:</label>
                 <input type="text" name="first_name" placeholder="first name" required>
@@ -59,7 +67,6 @@
                 <input type="text" name="description" placeholder="Any thing you want to add about your self">
             </div>
 
-            <input type="hidden" name="role" value="none">
 
 
             <input id="form_element" type="submit" value="Sign up">
