@@ -1,113 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new_member_page.css') }}">
+    <title>Add Member</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+        .nav-item a {
+            color: #000;
+        }
+        .nav-item a:hover {
+            color: #007bff;
+        }
+        .row > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-primary a {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <nav class="nav">
-        <div>
-            <h1>Sandipani</h1>
-        </div>
-        <div>
-            <ul id="ul">
-                <li id="list_item"><a href="/main_page">Home</a></li>
-                <li id="list_item"><a href="/new_member">Add Member</a></li>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Sandipani</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/main_page">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/new_member">Add Member</a></li>
+                <li class="nav-item">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <span class="navbar-text">admin</span>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <div>
-        <div>
-            <form action="/add_member" method="post">
-                <div class="form_element">
+    <!-- Form -->
+    <div class="container my-4">
+        <form action="/add_member" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-4">
                     <label for="first_name">First name:</label>
-                    <input type="text" name="first_name" placeholder="first name" required>
-                
+                    <input type="text" class="form-control" name="first_name" placeholder="First name" required>
+                </div>
+                <div class="form-group col-md-4">
                     <label for="middle_name">Middle Name:</label>
-                    <input type="text" name="middle_name" placeholder="middle name">
-
+                    <input type="text" class="form-control" name="middle_name" placeholder="Middle name">
+                </div>
+                <div class="form-group col-md-4">
                     <label for="last_name">Last Name:</label>
-                    <input type="text" name="last_name" placeholder="last name" required>
+                    <input type="text" class="form-control" name="last_name" placeholder="Last name" required>
                 </div>
-
-                <div>
+            </div>
+            <!--  -->
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
                     <label for="email">Email:</label>
-                    <input type="text" name="email" placeholder="email">
-
-                    <label for="street_1">Street 1:</label>
-                    <input type="text" name="street_1" placeholder="street 1">
-
-                    <label for="street_2">Street 2:</label>
-                    <input type="text" name="street_2" placeholder="street 2">
+                    <input type="email" class="form-control" name="email" placeholder="Email" required>
                 </div>
-
-                <div>
-                    <label for="city">City:</label>
-                    <input type="text" name="city" placeholder="city">
-
-                    <label for="state">State:</label>
-                    <input type="text" name="state" placeholder="state">
-
-                    <label for="zip">Zip code:</label>
-                    <input type="text" name="zip" placeholder="zip code">
-                </div>
-
-                <div>
-                    <label for="country">Country:</label>
-                    <input type="text" name="country" placeholder="country">
-
-                    <label for="spouse">Spouse:</label>
-                    <input type="text" name="spouse" placeholder="spouse">
-
-                    <label for="parents:">Parents:</label>
-                    <input type="text" name="parents" placeholder="parents">
-                </div>
-
-                <div>
-                    <label for="children">Children:</label>
-                    <input type="text" name="children" placeholder="children">
-
+                <div class="form-group col-md-4">
                     <label for="phone_1">Phone 1:</label>
-                    <input type="text" name="phone_1" placeholder="phone 1">
-
+                    <input type="text" class="form-control" name="phone_1" placeholder="Phone 1">
+                </div>
+                <div class="form-group col-md-4">
                     <label for="phone_2">Phone 2:</label>
-                    <input type="text" name="phone_2" placeholder="phone 2">
+                    <input type="text" class="form-control" name="phone_2" placeholder="Phone 2" required>
                 </div>
+            </div>
+            <!--  -->
 
-                <div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="street_1">Street 1:</label>
+                    <input type="text" class="form-control" name="street_1" placeholder="Street 1">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="street_2">Street 2:</label>
+                    <input type="text" class="form-control" name="street_2" placeholder="Street 2">
+                </div>
+            </div>
+            <!--  -->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" name="city" placeholder="City">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="state">State:</label>
+                    <input type="text" class="form-control" name="state" placeholder="State">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="zip">Zip code:</label>
+                    <input type="text" class="form-control" name="zip" placeholder="Zip code">
+                </div>
+            </div>
+            <!--  -->
+            
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="country">Country:</label>
+                    <input type="text" class="form-control" name="country" placeholder="country">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="children">Children:</label>
+                    <input type="text" class="form-control" name="children" placeholder="Children">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="spouse">Spouse:</label>
+                    <input type="text" class="form-control" name="spouse" placeholder="Spouse">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="parents">Parents:</label>
+                    <input type="text" class="form-control" name="parents" placeholder="Parents">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
                     <label for="notes">Notes:</label>
-                    <input type="text" name="notes" placeholder="notes">
-
-
-                    <label for="email_list">Email list:</label>
-                    
-                    
-                    <label id="em_lab" for="option1">None:</label>
-                    <input type="checkbox" id="option1"
-                    name="option1" value="None">
-
-                    <label id="em_lab" for="option2">Yajmans:</label>
-                    <input type="checkbox" id="option2"
-                    name="option2" value="Yajmans">
-
-                    <label id="em_lab" for="option3">General Contact:</label>
-                    <input type="checkbox" id="option3"
-                    name="option3" value="General Contact">
-
-                    <label id="em_lab" for="option4">Education:</label>
-                    <input type="checkbox" id="option4"
-                    name="option4" value="Education">
-
+                    <input type="text" class="form-control" name="notes" placeholder="Notes">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="email_list">Email list:</label>
+                    <input type="text" class="form-control" name="email_list" placeholder="Email List">
+                </div>
+            </div>
 
-                <input type="submit" value="Add member!">
-            </form>
+            <!-- You can add rest of your form fields using the same structure -->
 
-        </div>
+            <button type="submit" class="btn btn-primary mt-3">Add member!</button>
+        </form>
     </div>
+</body>
+</html>
