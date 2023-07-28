@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 #from flask_app.models import thought
 from flask import flash
+from flask_app.models import email_list
 
 
 class Member:
@@ -22,7 +23,7 @@ class Member:
         self.phone_1 = data['phone_1']
         self.phone_2 = data['phone_2']
         self.notes = data['notes']
-        self.email_list = data['email_list']
+        #self.email_list = data['email_list']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 

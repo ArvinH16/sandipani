@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Add Member</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,30 +13,37 @@
         body {
             font-family: Arial, sans-serif;
         }
+
         .navbar-brand {
             font-size: 1.5em;
         }
+
         .nav-item a {
             color: #000;
         }
+
         .nav-item a:hover {
             color: #007bff;
         }
-        .row > div {
+
+        .row>div {
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .btn-primary a {
             color: #fff;
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Sandipani</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -43,7 +51,8 @@
                 <li class="nav-item"><a class="nav-link" href="/main_page">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/new_member">Add Member</a></li>
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
                     <span class="navbar-text">admin</span>
                 </li>
             </ul>
@@ -68,7 +77,7 @@
                 </div>
             </div>
             <!--  -->
-            
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="email">Email:</label>
@@ -111,7 +120,7 @@
                 </div>
             </div>
             <!--  -->
-            
+
 
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -142,18 +151,21 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="email_list">Email list:</label>
-                {%for i in range(0, len(email_lists))}
-                <input type="text" class="form-control" name="email_list" placeholder="Email List">
-                <label for="{{{f'option{i}}}}">{{email_lists[i].type}}:</label>
-                <input type="checkbox" id="">
-                {%endfor%}
+                    <div class="d-flex flex-wrap">
+                        {%for email_list in email_lists%}
+                            <div class="form-check mr-3">
+                                <input class="form-check-input" type="checkbox" id="{{email_list.id}}" name="{{email_list.id}}" value="{{email_list.type}}">
+                                <label class="form-check-label" for="{{email_list.id}}">{{email_list.type}}</label>
+                            </div>
+                        {%endfor%}
+                    </div>
                 </div>
             </div>
-
             <!-- You can add rest of your form fields using the same structure -->
 
             <button type="submit" class="btn btn-primary mt-3">Add member!</button>
         </form>
     </div>
 </body>
+
 </html>
