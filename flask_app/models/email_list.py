@@ -21,3 +21,13 @@ class Email_list:
             all_email_lists.append(email_list_object)
 
         return all_email_lists
+
+    #This is for email_list_member database where we correlate members and email lists
+    @classmethod
+    def add_email_list_member(cls, data):
+        query = "INSERT INTO emailList_member(member_id, email_list_id) VALUES(%(member_id)s, %(email_list_id)s)"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
+
+
