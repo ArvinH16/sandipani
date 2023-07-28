@@ -154,37 +154,13 @@
                     <div class="d-flex flex-wrap">
                         {%for email_list in email_lists%}
                             <div class="form-check mr-3">
-                                <input class="form-check-input" type="checkbox" id="{{email_list.type}}" name="{{email_list.type}}" value="{{email_list.type}}">
-                                <label class="form-check-label" for="{{email_list.type}}">{{email_list.type}}</label>
+                                <input class="form-check-input" type="checkbox" id="{{email_list.id}}" name="{{email_list.id}}" value="{{email_list.type}}">
+                                <label class="form-check-label" for="{{email_list.id}}">{{email_list.type}}</label>
                             </div>
                         {%endfor%}
                     </div>
                 </div>
-                
-                
-                
-                <!--  -->
-                <!-- <label for="email_list">Email list:</label>
-                    
-                    
-                <label id="em_lab" for="option1">None:</label>
-                <input type="checkbox" id="option1"
-                name="option1" value="None">
-
-                <label id="em_lab" for="option2">Yajmans:</label>
-                <input type="checkbox" id="option2"
-                name="option2" value="Yajmans">
-
-                <label id="em_lab" for="option3">General Contact:</label>
-                <input type="checkbox" id="option3"
-                name="option3" value="General Contact">
-
-                <label id="em_lab" for="option4">Education:</label>
-                <input type="checkbox" id="option4"
-                name="option4" value="Education"> -->
-                <!--  -->
             </div>
-
             <!-- You can add rest of your form fields using the same structure -->
 
             <button type="submit" class="btn btn-primary mt-3">Add member!</button>
