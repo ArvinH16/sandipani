@@ -15,8 +15,39 @@ def new_member_page():
 
 @app.route("/add_member", methods=["POST"])
 def add_member():
+    
 
-    member = Member.add_member(request.form)
+    data_member = {
+        "first_name": request.form['first_name'],
+        "middle_name": request.form['middle_name'],
+        "last_name": request.form['last_name'],
+        "email": request.form['email'],
+        "spouse": request.form['spouse'],
+        "parents": request.form['parents'],
+        "children": request.form['children'],
+        "street_1": request.form['street_1'],
+        "street_2": request.form['street_2'],
+        "city": request.form['city'],
+        "state": request.form['state'],
+        "zip": request.form['zip'],
+        "country": request.form['country'],
+        "phone_1": request.form['phone_1'],
+        "phone_2": request.form['phone_2'],
+        "notes": request.form['notes']
+    }
+
+    member = Member.add_member(data_member)
+
+    email_lists = Email_list.get_all_email_list()
+
+    for email_list in email_lists:
+        if str(email_list.id) in request.form:
+            data_email_list = {
+                "member_id": member,
+                "email_list_id": email_list.id
+            }
+            Email_list.add_email_list_member(data_email_list)
+
 
     return redirect("/main_page")
 
