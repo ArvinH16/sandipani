@@ -154,8 +154,8 @@
                     <div class="d-flex flex-wrap">
                         {%for email_list in email_lists%}
                             <div class="form-check mr-3">
-                                <input class="form-check-input" type="checkbox" id="{{email_list.id}}" name="{{email_list.id}}" value="{{email_list.type}}">
-                                <label class="form-check-label" for="{{email_list.id}}">{{email_list.type}}</label>
+                                <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}">
+                                <label class="form-check-label" for="email_list">{{email_list.type}}</label>
                             </div>
                         {%endfor%}
                     </div>
