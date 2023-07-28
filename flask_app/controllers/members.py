@@ -38,15 +38,22 @@ def add_member():
 
     member = Member.add_member(data_member)
 
-    email_lists = Email_list.get_all_email_list()
+    #email_lists = Email_list.get_all_email_list()
 
-    for email_list in email_lists:
-        if str(email_list.id) in request.form:
-            data_email_list = {
-                "member_id": member,
-                "email_list_id": email_list.id
-            }
-            Email_list.add_email_list_member(data_email_list)
+    # for email_list in email_lists:
+    #     if str(email_list.id) in request.form:
+    #         data_email_list = {
+    #             "member_id": member,
+    #             "email_list_id": email_list.id
+    #         }
+    #         Email_list.add_email_list_member(data_email_list)
+    email_list_checkboxes = request.form.getlist('email_list')
+    for email_list_checkbox in email_list_checkboxes:
+        data_email_list = {
+            "member_id": member,
+            "email_list_id": int(email_list_checkbox)
+        }
+        Email_list.add_email_list_member(data_email_list)
 
 
     return redirect("/main_page")
