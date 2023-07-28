@@ -4,11 +4,13 @@ from flask import render_template, redirect, request, session, flash
 #from flask_app.models.thought import Thought
 #from flask_app.models.admin import Admin
 from flask_app.models.member import Member
+from flask_app.models.email_list import Email_list
 
 
 @app.route("/new_member")
 def new_member_page():
-    return render_template("new_member_page.html")
+    email_lists = Email_list.get_all_email_list()
+    return render_template("new_member_page.html", email_lists = email_lists)
 
 
 @app.route("/add_member", methods=["POST"])
