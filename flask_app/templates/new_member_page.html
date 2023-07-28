@@ -142,7 +142,11 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="email_list">Email list:</label>
-                    <input type="text" class="form-control" name="email_list" placeholder="Email List">
+                {%for i in range(0, len(email_lists))}
+                <input type="text" class="form-control" name="email_list" placeholder="Email List">
+                <label for="{{{f'option{i}}}}">{{email_lists[i].type}}:</label>
+                <input type="checkbox" id="">
+                {%endfor%}
                 </div>
             </div>
 
