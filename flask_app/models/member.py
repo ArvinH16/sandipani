@@ -26,6 +26,7 @@ class Member:
         #self.email_list = data['email_list']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.email_list = []
 
     @classmethod
     def get_all_members(cls):
@@ -55,6 +56,19 @@ class Member:
         query = "SELECT * FROM members WHERE id = %(member_id)s;"
         result = connectToMySQL('sandipani').query_db(query, data)
         return cls(result[0])
+
+
+        #query = "SELECT * FROM members LEFT JOIN emailList_member ON members.id = emailList_member.member_id;"
+
+        # for member in result:
+        #     one_member = cls(member)
+
+        #     member_email_list = {
+        #         "id": member['emailList_member.id'],
+        #         "type": member['emailList_member.type'],
+        #         "created_at": member['emailList_member.created_at'],
+        #         "updated_at": member['emailList_member.updated_at']
+        #     }
 
     @classmethod
     def edit_member(cls, data):

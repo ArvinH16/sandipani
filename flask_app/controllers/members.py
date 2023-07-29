@@ -63,9 +63,22 @@ def view_member(member_id):
     data_member = {
         "member_id": member_id
     }
+
+    email_lists = Email_list.get_all_email_list()
+
+    email_lists_checked = Email_list.get_member_email_lists(data_member)
+    print(email_lists_checked)
+    # email_list_ids_checked_list = []
+    # for email_list_id_checked in email_list_ids_checked:
+    #     email_list_ids_checked_list.append(email_list_id_checked.id)
+    email_list_ids = []
+    for email_list_checked in email_lists_checked:
+        email_list_ids.append(email_list_checked['email_list_id'])
+    
+
     member = Member.get_member(data_member)
     
-    return render_template("view_member.html", member = member)
+    return render_template("view_member.html", member = member, email_lists = email_lists, email_list_ids = email_list_ids)
 
 @app.route("/edit_member", methods=["POST"])
 def edit_member():

@@ -29,5 +29,21 @@ class Email_list:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+    
+    @classmethod
+    def edit_email_list_member(cls, data):
+        query = "UPDATE"
+    
+
+    @classmethod
+    def get_member_email_lists(cls, data):
+        query = "SELECT * FROM emailList_member WHERE member_id = %(member_id)s;"
+
+        results = connectToMySQL('sandipani').query_db(query, data)
+        # member_email_lists_ids = []
+        # for member_email_lists_id in results:
+        #     member_email_lists_ids.append(member_email_lists_id.member_id)
+        # print(member_email_lists_ids)
+        return results
 
 
