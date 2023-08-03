@@ -92,7 +92,9 @@ def view_member(member_id):
 @app.route("/edit_member", methods=["POST"])
 def edit_member():
     
-    member_edited = Member.edit_member(request.form)
+    Member.edit_member(request.form)
+
+    Email_list.purge_email_list_member(request.form)
 
     email_list_checkboxes = request.form.getlist('email_list')
 
