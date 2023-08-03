@@ -96,7 +96,12 @@ def edit_member():
 
     email_list_checkboxes = request.form.getlist('email_list')
 
+    print(email_list_checkboxes)
+
 #    member_email_lists = Email_list.get_member_email_lists(request.form['member_id'])
+    
+
+    Email_list.purge_email_list_member(request.form)
 
     for email_list_checkbox in email_list_checkboxes:
         data_email_list = {
