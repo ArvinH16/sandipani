@@ -53,9 +53,34 @@ class Member:
 
     @classmethod
     def get_member(cls, data):
-        query = "SELECT * FROM members WHERE id = %(member_id)s;"
+        #query = "SELECT * FROM members WHERE id = %(member_id)s;"
+        query = "SELECT * FROM members LEFT JOIN emailList_member ON members.id = emailList_member.member_id LEFT JOIN email_lists ON emailList_member.email_list_id = email_lists.id WHERE members.id = %(member_id)s;"
         result = connectToMySQL('sandipani').query_db(query, data)
-        return cls(result[0])
+
+        member = cls(result[0])
+        print("member with empty list")
+        print(member)
+        for member_email_list in result:
+            email_list_data = {
+                "id": member_email_list['email_list_id'],
+                "type": member_email_list['type'],
+                "created_at": member_email_list['created_at'],
+                "updated_at": member_email_list['updated_at']
+            }
+
+            email_list_object = email_list.Email_list(email_list_data)
+
+            print("printed email list object")
+            print(email_list_object)
+
+            member.email_list.append(email_list_object)
+        
+        print("member with email list object")
+        print(member)
+        return member
+
+        
+        #return cls(result[0])
 
 
         #query = "SELECT * FROM members LEFT JOIN emailList_member ON members.id = emailList_member.member_id;"
