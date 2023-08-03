@@ -1,101 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/new_member_page.css') }}">
 
+<head>
+    <title>Edit Member</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+
+        .nav-item a {
+            color: #000;
+        }
+
+        .nav-item a:hover {
+            color: #007bff;
+        }
+
+        .row>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary a {
+            color: #fff;
+        }
+    </style>
 </head>
+
 <body>
-    <nav class="nav">
-        <div>
-            <h1>Sandipani</h1>
-        </div>
-        <div>
-            <ul id="ul">
-                <li id="list_item"><a href="/main_page">Home</a></li>
-                <li id="list_item"><a href="/new_member">Add Member</a></li>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Sandipani</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/main_page">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/new_member">Add Member</a></li>
+                <li class="nav-item">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
+                    <span class="navbar-text">admin</span>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <div>
+    <!-- Form -->
+    <div class="container my-4">
         <form action="/edit_member" method="post">
-            <div class="form_element">
-
-                <input type="hidden" name="member_id" value="{{member.id}}">
-
-                <label for="first_name">First name:</label>
-                <input type="text" name="first_name" value="{{member.first_name}}" required>
+            <input type="hidden" name="member_id" value="{{member.id}}">
             
-                <label for="middle_name">Middle Name:</label>
-                <input type="text" name="middle_name" value="{{member.middle_name}}">
-
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" value="{{member.last_name}}" required>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="first_name">First name:</label>
+                    <input type="text" class="form-control" name="first_name" value="{{member.first_name}}" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="middle_name">Middle Name:</label>
+                    <input type="text" class="form-control" name="middle_name" value="{{member.middle_name}}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" name="last_name" value="{{member.last_name}}" required>
+                </div>
             </div>
-
-            <div>
-                <label for="email">Email:</label>
-                <input type="text" name="email" value="{{member.email}}">
-
-                <label for="street_1">Street 1:</label>
-                <input type="text" name="street_1" value="{{member.street_1}}">
-
-                <label for="street_2">Street 2:</label>
-                <input type="text" name="street_2" value="{{member.street_2}}">
+        
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name="email" value="{{member.email}}" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="phone_1">Phone 1:</label>
+                    <input type="text" class="form-control" name="phone_1" value="{{member.phone_1}}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="phone_2">Phone 2:</label>
+                    <input type="text" class="form-control" name="phone_2" value="{{member.phone_2}}">
+                </div>
             </div>
-
-            <div>
-                <label for="city">City:</label>
-                <input type="text" name="city" value="{{member.city}}">
-
-                <label for="state">State:</label>
-                <input type="text" name="state" value="{{member.state}}">
-
-                <label for="zip">Zip code:</label>
-                <input type="text" name="zip" value="{{member.zip}}">
+        
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="street_1">Street 1:</label>
+                    <input type="text" class="form-control" name="street_1" value="{{member.street_1}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="street_2">Street 2:</label>
+                    <input type="text" class="form-control" name="street_2" value="{{member.street_2}}">
+                </div>
             </div>
-
-            <div>
-                <label for="country">Country:</label>
-                <input type="text" name="country" value="{{member.country}}">
-
-                <label for="spouse">Spouse:</label>
-                <input type="text" name="spouse" value="{{member.spouse}}">
-
-                <label for="parents:">Parents:</label>
-                <input type="text" name="parents" value="{{member.parents}}">
+        
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" name="city" value="{{member.city}}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="state">State:</label>
+                    <input type="text" class="form-control" name="state" value="{{member.state}}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="zip">Zip code:</label>
+                    <input type="text" class="form-control" name="zip" value="{{member.zip}}">
+                </div>
             </div>
-
-            <div>
-                <label for="children">Children:</label>
-                <input type="text" name="children" value="{{member.children}}">
-
-                <label for="phone_1">Phone 1:</label>
-                <input type="text" name="phone_1" value="{{member.phone_1}}">
-
-                <label for="phone_2">Phone 2:</label>
-                <input type="text" name="phone_2" value="{{member.phone_2}}">
+        
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="country">Country:</label>
+                    <input type="text" class="form-control" name="country" value="{{member.country}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="children">Children:</label>
+                    <input type="text" class="form-control" name="children" value="{{member.children}}">
+                </div>
             </div>
-
-            <div>
-                <label for="notes">Notes:</label>
-                <input type="text" name="notes" value="{{member.notes}}">                
-                
-                {%for email_list in email_lists%}
-                    <div class="form-check mr-3">
-                        <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}" {%if email_list.id in email_list_ids%}checked{%endif%} >
-                        <label class="form-check-label" for="email_list">{{email_list.type}}</label>
+        
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="spouse">Spouse:</label>
+                    <input type="text" class="form-control" name="spouse" value="{{member.spouse}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="parents">Parents:</label>
+                    <input type="text" class="form-control" name="parents" value="{{member.parents}}">
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="notes">Notes:</label>
+                    <input type="text" class="form-control" name="notes" value="{{member.notes}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email_list">Email list:</label>
+                    <div class="d-flex flex-wrap">
+                        {%for email_list in email_lists%}
+                            <div class="form-check mr-3">
+                                <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}" {%if email_list.id in email_list_ids%}checked{%endif%}>
+                                <label class="form-check-label" for="email_list">{{email_list.type}}</label>
+                            </div>
+                        {%endfor%}
                     </div>
-                {%endfor%}
-
+                </div>
             </div>
-
-            <input type="submit" value="Edit member">
+        
+            <button type="submit" class="btn btn-primary mt-3">Edit member</button>
         </form>
+        
     </div>
 </body>
+
 </html>

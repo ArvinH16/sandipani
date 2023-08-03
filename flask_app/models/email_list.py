@@ -30,11 +30,11 @@ class Email_list:
 
         return result
     
+
     @classmethod
     def purge_email_list_member(cls, data):
         query = "DELETE FROM emailList_member WHERE member_id = %(member_id)s;"
         result = connectToMySQL('sandipani').query_db(query, data)
-
         return result
 
     @classmethod
