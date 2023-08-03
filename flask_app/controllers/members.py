@@ -65,6 +65,8 @@ def view_member(member_id):
         "member_id": member_id
     }
 
+
+    """
     email_lists = Email_list.get_all_email_list()
 
     email_lists_checked = Email_list.get_member_email_lists(data_member)
@@ -75,9 +77,15 @@ def view_member(member_id):
     email_list_ids = []
     for email_list_checked in email_lists_checked:
         email_list_ids.append(email_list_checked['email_list_id'])
-    
+    """
 
+    email_lists = Email_list.get_all_email_list()
     member = Member.get_member(data_member)
+    for test in member.email_list:
+        print(test.id)
+    email_list_ids = []
+    for email_list_joined in member.email_list:
+        email_list_ids.append(email_list_joined.id)
     
     return render_template("view_member.html", member = member, email_lists = email_lists, email_list_ids = email_list_ids)
 
