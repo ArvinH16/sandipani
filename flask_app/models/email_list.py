@@ -31,9 +31,8 @@ class Email_list:
         return result
     
     @classmethod
-    def edit_email_list_member(cls, data):
-        query = "UPDATE"
-    
+    def remove_email_list_member(cls, data):
+        pass
 
     @classmethod
     def get_member_email_lists(cls, data):

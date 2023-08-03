@@ -58,6 +58,7 @@ def add_member():
 
     return redirect("/main_page")
 
+
 @app.route("/view_member/<int:member_id>")
 def view_member(member_id):
     data_member = {
@@ -84,5 +85,18 @@ def view_member(member_id):
 def edit_member():
     
     member_edited = Member.edit_member(request.form)
+
+    email_list_checkboxes = request.form.getlist('email_list')
+
+#    member_email_lists = Email_list.get_member_email_lists(request.form['member_id'])
+
+    for email_list_checkbox in email_list_checkboxes:
+        data_email_list = {
+            "member_id": request.form['member_id'],
+            "email_list_id": int(email_list_checkbox)
+        }
+        Email_list.add_email_list_member(data_email_list)
+#    for email_list in member_email_lists:
+#       print(email_list)
     #tested
     return redirect("/main_page")
