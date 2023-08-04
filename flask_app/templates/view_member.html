@@ -35,7 +35,26 @@
         .btn-primary a {
             color: #fff;
         }
+
+        #red {
+            background-color: red;
+            border-color: red;
+        }
     </style>
+
+    <script>
+        window.onload = function() {
+            var deleteForm = document.getElementById('deleteMemberForm');
+
+            deleteForm.onsubmit = function(e) {
+                var confirmation = confirm('Are you sure you want to delete this member?');
+                if (!confirmation) {
+                    e.preventDefault();
+                }
+            }
+        }
+    </script>
+    
 </head>
 
 <body>
@@ -61,6 +80,13 @@
 
     <!-- Form -->
     <div class="container my-4">
+        <div class="text-right mb-3">
+            <form id="deleteMemberForm" action="/delete_member" method="post">
+                <input type="hidden" name="member_id" value="{{member.id}}">
+                <button type="submit" id="red" class="btn btn-primary">Delete member</button>
+            </form>
+        </div>
+
         <form action="/edit_member" method="post">
             <input type="hidden" name="member_id" value="{{member.id}}">
             

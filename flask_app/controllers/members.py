@@ -115,3 +115,10 @@ def edit_member():
 #       print(email_list)
     #tested
     return redirect("/main_page")
+
+@app.route("/delete_member", methods=["POST"])
+def delete_member():
+    
+    Member.delete_member(request.form)
+
+    return redirect("/main_page")
