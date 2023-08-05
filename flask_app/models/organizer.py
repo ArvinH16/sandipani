@@ -37,6 +37,34 @@ class Organizer:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+    
+    @classmethod
+    def delete_organizer(cls, data):
+        query = "DELETE FROM organizers WHERE id = %(id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
+    
+    @classmethod
+    def change_role(cls, data):
+        query = "UPDATE organizers SET role = %(updated_role)s WHERE id = %(id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
+    
+    @classmethod
+    def get_all_pending_organizers(cls):
+        query = "SELECT * FROM organizers WHERE role = 'none';"
+        result = connectToMySQL('sandipani').query_db(query)
+
+        return result
+    
+    @classmethod
+    def get_all_organizers(cls):
+        query = "SELECT * FROM organizers WHERE role != 'none';"
+        result = connectToMySQL('sandipani').query_db(query)
+
+        return result
 
     @staticmethod
     def sigh_up_validation(data):

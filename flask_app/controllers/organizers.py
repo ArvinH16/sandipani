@@ -63,3 +63,60 @@ def dashboard():
     all_members = Member.get_all_members()
 
     return render_template("dashboard.html", all_members = all_members)
+
+
+@app.route("/manage_organizers")
+def manage_org_page():
+    pending_organizers = Organizer.get_all_pending_organizers()
+    all_organizers = Organizer.get_all_organizers()
+
+    return render_template("manage_organizers.html", pending_organizers = pending_organizers, all_organizers = all_organizers)
+
+@app.route("/pend_org_form", methods=['POST'])
+def process_pend_org_form():
+    data = {
+        "id": request.form["pending_organizers_id"],
+        "role": request.form["role"],
+        "decision": request.form["decision"]
+    }
+
+    if data["decision"] == "deny":
+        Organizer.delete_organizer(data)
+        return redirect("/manage_organizers")
+    else:
+        Organizer.change_role(data)
+        return redirect("/manage_organizers")
+    
+@app.route("/update_organizer", methods=['POST'])
+def update_organizer():
+    data = {
+        "id": request.form["organizer_id"],
+        "updated_role": request.form["role"],
+        "current_role": request.form["organizer_role"],
+        "first_name": request.form["organizer_first_name"]
+    }
+
+    if data["current_role"] == data["updated_role"]:
+        flash("You haven't made any changes to the role to submit.", "update_organizer")
+        return redirect("/manage_organizers")
+    else:
+        Organizer.change_role(data)
+        first_name = data['first_name']
+        updated_role = data['updated_role']
+
+        flash(f'{first_name} just got their role changed to {updated_role}', "update_organizer")
+
+        return redirect("/manage_organizers")
+
+@app.route("/delete_organizer", methods=["POST"])
+def delete_organizer():
+    data = {
+        "id": request.form["organizer_id"],
+        "first_name": request.form['organizer_first_name']
+    }
+    Organizer.delete_organizer(data)
+    flash(f'{first_name} just got deleted', "update_organizer")
+    return redirect("/manage_organizer")
+
+
+        

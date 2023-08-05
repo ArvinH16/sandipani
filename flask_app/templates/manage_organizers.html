@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            var decision = document.getElementById('pend_org_form');
+    
+            decision.onsubmit = function(e) {
+                var confirmation = confirm('Confirm changes to pending organizer role?');
+                if (!confirmation) {
+                    e.preventDefault();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            var deleteOrganizer = document.getElementById('delete_organizer');
+
+            deleteOrganizer.onsubmit = function(e) {
+                var confirmation = confirm('Confirm deleting organizer?');
+                if (!confirmation) {
+                    e.preventDefault();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            var changeOrgRole = document.getElementById('change_org_role');
+
+            changeOrgRole.onsubmit = function(e) {
+                var confirmation = confirm('Confirm changes to organizer role?');
+                if (!confirmation) {
+                    e.preventDefault();
+                }
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+    <div>
+        
+        {%for pending_organizer in pending_organizers%}
+        <form id="pend_org_form" action="/pend_org_form" method="post">
+            <input type="hidden" name="pending_organizers_id" value="{{pending_organizer.id}}">
+
+            <div>
+                <p style="display: inline-block;">{{pending_organizer.first_name}}</p>
+                <p style="display: inline-block;">{{pending_organizer.last_name}}</p>
+                <p style="display: inline-block;">{{pending_organizer.email}}</p>
+                <p style="display: inline-block;">{{pending_organizer.phone_number}}</p>
+            </div>
+
+            <select name="role" id="">
+                <option value="admin">Admin</option>
+                <option value="member_viewer">Member Viewer</option>
+                <option value="member_editor">Member Editor</option>
+                <option value="donation_editor">Donation Editor</option>
+            </select>
+            <select name="decision" id="">
+                <option value="accept">Accept</option>
+                <option value="deny">Deny</option>
+            </select>
+
+            <input type="submit" value="Submit" name="submit">
+        </form>
+        {%endfor%}
+        
+    </div>
+
+    <div>
+        {% with messages = get_flashed_messages(category_filter=['update_organizer']) %}
+            {% if messages %}
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {%for organizer in all_organizers%}
+
+        <form  id="change_org_role" action="/update_organizer" method="post">
+            <input type="hidden" name="organizer_id" value="{{organizer.id}}">
+            <input type="hidden" name="organizer_role" value="{{organizer.role}}">
+            <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
+
+
+            <div>
+                <p style="display: inline-block;">{{organizer.first_name}}</p>
+                <p style="display: inline-block;">{{organizer.last_name}}</p>
+                <p style="display: inline-block;">{{organizer.email}}</p>
+                <p style="display: inline-block;">{{organizer.phone_number}}</p>
+                <select name="role">
+                    <option {% if organizer.role == "admin" %}selected{%endif%} value="admin">Admin</option>
+                    <option {% if organizer.role == "member_viewer"%}selected{%endif%} value="member_viewer">Member Viewer</option>
+                    <option {% if organizer.role == "member_editor" %}selected{%endif%} value="member_editor">Member Editor</option>
+                    <option {% if organizer.role == "donation_editor" %}selected{%endif%} value="donation_editor">Donation Editor</option>
+                </select>
+                <input type="submit" value="Submit" name="submit">
+            </div>
+        </form>
+
+        <form action="/delete_organizer" id="delete_organizer" method="post">
+            <input type="hidden" name="organizer_id" value="{{organizer.id}}">
+            <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
+            <button type="submit">Delete organizer</button>
+
+        </form>
+        {%endfor%}
+        
+    </div>
+</body>
+</html>
