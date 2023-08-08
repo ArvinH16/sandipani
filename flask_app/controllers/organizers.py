@@ -119,7 +119,7 @@ def delete_organizer():
 
     Organizer.delete_organizer(data)
     flash(f'{first_name} just got deleted', "update_organizer")
-    return redirect("/manage_organizer")
+    return redirect("/manage_organizers")
 
 
         

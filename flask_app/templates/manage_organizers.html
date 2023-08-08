@@ -1,121 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        window.onload = function() {
-            var decision = document.getElementById('pend_org_form');
-    
-            decision.onsubmit = function(e) {
-                var confirmation = confirm('Confirm changes to pending organizer role?');
-                if (!confirmation) {
-                    e.preventDefault();
-                }
-            }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <style>
+        /* Additional Styles */
+        select {
+            font-size: 0.9em;
+            padding: 4px 8px;
+            height: auto;
+            border-radius: 4px;
+            margin-right: 5px;
         }
-    </script>
 
-    <script>
-        window.onload = function() {
-            var deleteOrganizer = document.getElementById('delete_organizer');
-
-            deleteOrganizer.onsubmit = function(e) {
-                var confirmation = confirm('Confirm deleting organizer?');
-                if (!confirmation) {
-                    e.preventDefault();
-                }
-            }
+        .organizer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e1e1e1;
+            padding: 10px 0;
         }
-    </script>
 
-    <script>
-        window.onload = function() {
-            var changeOrgRole = document.getElementById('change_org_role');
-
-            changeOrgRole.onsubmit = function(e) {
-                var confirmation = confirm('Confirm changes to organizer role?');
-                if (!confirmation) {
-                    e.preventDefault();
-                }
-            }
+        .organizer-details p {
+            display: inline-block;
+            margin-right: 15px;
         }
-    </script>
+
+        .organizer-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .organizer-actions select,
+        .organizer-actions button,
+        .organizer-actions input[type="submit"] {
+            margin-right: 5px;
+        }
+
+
+        input[type="submit"],
+        button[type="submit"],
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        button.delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        button[type="submit"] {
+            margin-left: 10px;
+        }
+
+
+
+
+        /* Copied from dashboard, take out un-necessary css out late  */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+
+        .nav-item a {
+            color: #000;
+        }
+
+        .nav-item a:hover {
+            color: #007bff;
+        }
+
+        .row>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary a {
+            color: #fff;
+        }
+    </style>
+
+    <!-- Your JS functions here... -->
 </head>
 
-
 <body>
-    <div>
-        
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Sandipani</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/main_page">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/new_member">Add Member</a></li>
+                <li class="nav-item"><a class="nav-link" href="/manage_organizers">Manage Organizers</a></li>
+                <li class="nav-item">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
+                    <span class="navbar-text">admin</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Pending Organizers -->
+        <h3 class="mb-3">Pending Organizers</h3>
+        {%if pending_organizers|length== 0%}
+            <h6>There are currently no pending organizers</h1>
+        {%endif%}
         {%for pending_organizer in pending_organizers%}
-        <form id="pend_org_form" action="/pend_org_form" method="post">
-            <input type="hidden" name="pending_organizers_id" value="{{pending_organizer.id}}">
-
-            <div>
-                <p style="display: inline-block;">{{pending_organizer.first_name}}</p>
-                <p style="display: inline-block;">{{pending_organizer.last_name}}</p>
-                <p style="display: inline-block;">{{pending_organizer.email}}</p>
-                <p style="display: inline-block;">{{pending_organizer.phone_number}}</p>
+        <div class="organizer-row">
+            <div class="organizer-details">
+                <p>{{pending_organizer.first_name}}</p>
+                <p>{{pending_organizer.last_name}}</p>
+                <p>{{pending_organizer.email}}</p>
+                <p>{{pending_organizer.phone_number}}</p>
             </div>
 
-            <select name="role" id="">
-                <option value="admin">Admin</option>
-                <option value="member_viewer">Member Viewer</option>
-                <option value="member_editor">Member Editor</option>
-                <option value="donation_editor">Donation Editor</option>
-            </select>
-            <select name="decision" id="">
-                <option value="accept">Accept</option>
-                <option value="deny">Deny</option>
-            </select>
-
-            <input type="submit" value="Submit" name="submit">
-        </form>
-        {%endfor%}
-        
-    </div>
-
-    <div>
-        {% with messages = get_flashed_messages(category_filter=['update_organizer']) %}
-            {% if messages %}
-                {% for message in messages %}
-                <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        {%for organizer in all_organizers%}
-
-        <form  id="change_org_role" action="/update_organizer" method="post">
-            <input type="hidden" name="organizer_id" value="{{organizer.id}}">
-            <input type="hidden" name="organizer_role" value="{{organizer.role}}">
-            <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
-
-
-            <div>
-                <p style="display: inline-block;">{{organizer.first_name}}</p>
-                <p style="display: inline-block;">{{organizer.last_name}}</p>
-                <p style="display: inline-block;">{{organizer.email}}</p>
-                <p style="display: inline-block;">{{organizer.phone_number}}</p>
-                <select name="role">
-                    <option {% if organizer.role == "admin" %}selected{%endif%} value="admin">Admin</option>
-                    <option {% if organizer.role == "member_viewer"%}selected{%endif%} value="member_viewer">Member Viewer</option>
-                    <option {% if organizer.role == "member_editor" %}selected{%endif%} value="member_editor">Member Editor</option>
-                    <option {% if organizer.role == "donation_editor" %}selected{%endif%} value="donation_editor">Donation Editor</option>
-                </select>
-                <input type="submit" value="Submit" name="submit">
+            <div class="organizer-actions">
+                <form id="pend_org_form" action="/pend_org_form" method="post" style="display: inline-block;">
+                    <input type="hidden" name="pending_organizers_id" value="{{pending_organizer.id}}">
+                    <select name="role">
+                        <option value="admin">Admin</option>
+                        <option value="member_viewer">Member Viewer</option>
+                        <option value="member_editor">Member Editor</option>
+                        <option value="donation_editor">Donation Editor</option>
+                    </select>
+                    <select name="decision">
+                        <option value="accept">Accept</option>
+                        <option value="deny">Deny</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
             </div>
-        </form>
-
-        <form action="/delete_organizer" id="delete_organizer" method="post">
-            <input type="hidden" name="organizer_id" value="{{organizer.id}}">
-            <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
-            <button type="submit">Delete organizer</button>
-
-        </form>
+        </div>
         {%endfor%}
-        
+        <!-- All Organizers -->
+        <h3 class="mt-4 mb-3">Current Organizers</h3>
+        {% for organizer in all_organizers%}
+        <div class="organizer-row">
+            <div class="organizer-details">
+                <p>{{organizer.first_name}}</p>
+                <p>{{organizer.last_name}}</p>
+                <p>{{organizer.email}}</p>
+                <p>{{organizer.phone_number}}</p>
+            </div>
+
+            <div class="organizer-actions">
+                <form id="change_org_role" action="/update_organizer" method="post" style="display: inline-block;">
+                    <input type="hidden" name="organizer_id" value="{{organizer.id}}">
+                    <input type="hidden" name="organizer_role" value="{{organizer.role}}">
+                    <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
+                    <select name="role">
+                        <option {% if organizer.role=="admin" %}selected{%endif%} value="admin">Admin</option>
+                        <option {% if organizer.role=="member_viewer" %}selected{%endif%} value="member_viewer">Member
+                            Viewer</option>
+                        <option {% if organizer.role=="member_editor" %}selected{%endif%} value="member_editor">Member
+                            Editor</option>
+                        <option {% if organizer.role=="donation_editor" %}selected{%endif%} value="donation_editor">
+                            Donation Editor</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
+
+
+                <form action="/delete_organizer" method="post" style="display: inline-block;">
+                    <input type="hidden" name="organizer_id" value="{{organizer.id}}">
+                    <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
+                    <button type="submit" class="btn delete-btn">Delete</button>
+                </form>
+
+
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </body>
+
 </html>
