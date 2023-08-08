@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Adding donation for {{member.first_name}}</h1>
+    <form action="/add_donation/tatvadarshan" method="post">
+        <input type="hidden" name="member_id" value="{{member.id}}">
+
+        <label for="amount">Amount:</label>
+        <input type="text" name="amount">
+
+        <label for="date">Date:</label>
+        <input type="date" name="date">
+
+        <label for="method">Method:</label>
+        <input type="text" name="method">
+
+        <label for="length">Length:</label>
+        <input type="text" name="length">
+
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="date" name="expiry_date">
+
+        <label for="notes">Notes:</label>
+        <input type="text" name="notes">
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
