@@ -142,8 +142,10 @@
             </div>
 
             <div class="organizer-actions">
-                <form id="pend_org_form" action="/pend_org_form" method="post" style="display: inline-block;">
+                <form id="pend_org_form" action="/pend_org_form" method="post" style="display: inline-block;" onsubmit="return confirmPending(this);">
                     <input type="hidden" name="pending_organizers_id" value="{{pending_organizer.id}}">
+                    <input type="hidden" name="pending_organizers_name" value="{{pending_organizer.first_name}}">
+
                     <select name="role">
                         <option value="admin">Admin</option>
                         <option value="member_viewer">Member Viewer</option>
@@ -171,7 +173,7 @@
             </div>
 
             <div class="organizer-actions">
-                <form id="change_org_role" action="/update_organizer" method="post" style="display: inline-block;">
+                <form id="change_org_role" action="/update_organizer" method="post" style="display: inline-block;" onsubmit="return confirmRoleChange(this);">
                     <input type="hidden" name="organizer_id" value="{{organizer.id}}">
                     <input type="hidden" name="organizer_role" value="{{organizer.role}}">
                     <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
@@ -188,7 +190,7 @@
                 </form>
 
 
-                <form action="/delete_organizer" method="post" style="display: inline-block;">
+                <form action="/delete_organizer" method="post" style="display: inline-block;" onsubmit="return confirmDelete(this);">
                     <input type="hidden" name="organizer_id" value="{{organizer.id}}">
                     <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
                     <button type="submit" class="btn delete-btn">Delete</button>
@@ -199,6 +201,30 @@
         </div>
         {% endfor %}
     </div>
+
+    <script>
+        function confirmRoleChange(form) {
+            let name = form.querySelector("[name='organizer_first_name']").value;
+            let role = form.querySelector("[name='role']").value;
+            return confirm(`Are you sure you want to change the role of ${name} to ${role}?`);
+        }
+
+        function confirmDelete(form) {
+            let name = form.querySelector("[name='organizer_first_name']").value;
+            return confirm(`Are you certain you wish to delete ${name}? This action cannot be undone.`);
+        }
+
+        function confirmPending(form) {
+            let name = form.querySelector("[name='pending_organizers_name']").value;
+            let decision = form.querySelector("[name='decision']").value;
+            let role = form.querySelector("[name='role']").value;
+            if (decision === "accept") {
+                return confirm(`Do you want to accept ${name} for the role of ${role}?`);
+            } else {
+                return confirm(`Are you sure you want to deny ${name}?`);
+            }
+        }
+    </script>
 </body>
 
 </html>
