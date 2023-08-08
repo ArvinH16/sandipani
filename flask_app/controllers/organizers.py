@@ -76,7 +76,7 @@ def manage_org_page():
 def process_pend_org_form():
     data = {
         "id": request.form["pending_organizers_id"],
-        "role": request.form["role"],
+        "updated_role": request.form["role"],
         "decision": request.form["decision"]
     }
 
@@ -114,6 +114,9 @@ def delete_organizer():
         "id": request.form["organizer_id"],
         "first_name": request.form['organizer_first_name']
     }
+
+    first_name = data['first_name']
+
     Organizer.delete_organizer(data)
     flash(f'{first_name} just got deleted', "update_organizer")
     return redirect("/manage_organizer")
