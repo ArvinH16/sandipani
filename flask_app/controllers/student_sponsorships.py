@@ -4,11 +4,11 @@ from flask import render_template, redirect, request, session, flash
 #from flask_app.models.thought import Thought
 from flask_app.models.organizer import Organizer
 from flask_app.models.member import Member
-from flask_app.models.tatvadarshan import Tatvadarshan
+from flask_app.models.student_sponsorship import Student_Sponsorship
 
 
-@app.route("/add_donation/tatvadarshan/<int:member_id>")
-def render_add_tatvadarshan_page(member_id):
+@app.route("/add_donation/student_sponsorship/<int:member_id>")
+def render_add_student_sponsorship_page(member_id):
     data = {
         "member_id": member_id
     }
@@ -16,8 +16,8 @@ def render_add_tatvadarshan_page(member_id):
     return render_template("add_donation.html", member = member)
 
 
-@app.route("/add_donation/tatvadarshan", methods=["POST"])
-def add_tatvadarshan_form():
+@app.route("/add_donation/student_sponsorship", methods=["POST"])
+def add_student_sponsorship_form():
     data = {
         "member_id": request.form["member_id"],
         "amount": request.form["amount"],
@@ -27,6 +27,6 @@ def add_tatvadarshan_form():
         "expiry_date": request.form['expiry_date'],
         "notes": request.form["notes"]
     }
-    tatvadarshan = Tatvadarshan.create_tatvadarshan(data)
+    student_scholarhip = Student_Sponsorship.create_student_sponsorship(data)
 
     return redirect("/main_page")
