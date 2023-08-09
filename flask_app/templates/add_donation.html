@@ -3,98 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Donation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {%if donation_type == "tatvadarshan"%}
-    <h1>Adding Tatvadarshan for {{member.first_name}}</h1>
-    <form action="/add_donation/tatvadarshan" method="post">
-        <input type="hidden" name="member_id" value="{{member.id}}">
+    <div class="container">
+        {% if donation_type == "tatvadarshan" %}
+        <h1>Adding Tatvadarshan for {{ member.first_name }}</h1>
+        <form action="/add_donation/tatvadarshan" method="post">
+            <input type="hidden" name="member_id" value="{{member.id}}">
 
-        <label for="amount">Amount:</label>
-        <input type="text" name="amount">
+            <label for="amount">Amount:</label>
+            <input type="text" name="amount">
+    
+            <label for="date">Date:</label>
+            <input type="date" name="date">
+    
+            <label for="method">Method:</label>
+            <input type="text" name="method">
+    
+            <label for="length">Length:</label>
+            <input type="text" name="length">
+    
+            <label for="expiry_date">Expiry Date:</label>
+            <input type="date" name="expiry_date">
+    
+            <label for="notes">Notes:</label>
+            <input type="text" name="notes">
+    
+            <input type="submit" value="Submit">
+        </form>
+        {% endif %}
 
-        <label for="date">Date:</label>
-        <input type="date" name="date">
+        {% if donation_type == "student_sponsorship" %}
+        <h1>Adding Student Sponsorship for {{ member.first_name }}</h1>
+        <form action="/add_donation/student_sponsorship" method="post">
+            <input type="hidden" name="member_id" value="{{member.id}}">
 
-        <label for="method">Method:</label>
-        <input type="text" name="method">
+            <label for="amount">Amount:</label>
+            <input type="text" name="amount">
+    
+            <label for="date">Date:</label>
+            <input type="date" name="date">
+    
+            <label for="method">Method:</label>
+            <input type="text" name="method">
+    
+            <label for="length">Length:</label>
+            <input type="text" name="length">
+    
+            <label for="expiry_date">Expiry Date:</label>
+            <input type="date" name="expiry_date">
+    
+            <label for="notes">Notes:</label>
+            <input type="text" name="notes">
+    
+            <input type="submit" value="Submit">
+        </form>
+        {% endif %}
 
-        <label for="length">Length:</label>
-        <input type="text" name="length">
+        {% if donation_type == "donation" %}
+        <h1>Adding Donation for {{ member.first_name }}</h1>
+        <form action="/add_donation/donation" method="post">
+            <input type="hidden" name="member_id" value="{{member.id}}">
 
-        <label for="expiry_date">Expiry Date:</label>
-        <input type="date" name="expiry_date">
-
-        <label for="notes">Notes:</label>
-        <input type="text" name="notes">
-
-        <input type="submit" value="Submit">
-    </form>
-
-    {%endif%}
-
-    {%if donation_type == "student_sponsorship"%}
-    <h1>Adding Student Sponsorship for {{member.first_name}}</h1>
-    <form action="/add_donation/student_sponsorship" method="post">
-        <input type="hidden" name="member_id" value="{{member.id}}">
-
-        <label for="amount">Amount:</label>
-        <input type="text" name="amount">
-
-        <label for="date">Date:</label>
-        <input type="date" name="date">
-
-        <label for="method">Method:</label>
-        <input type="text" name="method">
-
-        <label for="length">Length:</label>
-        <input type="text" name="length">
-
-        <label for="expiry_date">Expiry Date:</label>
-        <input type="date" name="expiry_date">
-
-        <label for="notes">Notes:</label>
-        <input type="text" name="notes">
-
-        <input type="submit" value="Submit">
-    </form>
-
-    {%endif%}
-
-    {%if donation_type == "donation"%}
-    <h1>Adding Donation for {{member.first_name}}</h1>
-    <form action="/add_donation/donation" method="post">
-        <input type="hidden" name="member_id" value="{{member.id}}">
-
-        <label for="amount">Amount:</label>
-        <input type="text" name="amount">
-
-        <label for="date">Date:</label>
-        <input type="date" name="date">
-
-        <label for="method">Method:</label>
-        <input type="text" name="method">
-
-        <label for="event">Event:</label>
-        <input type="text" name="event">
-
-        <label for="notes">Notes:</label>
-        <input type="text" name="notes">
-
-        <input type="submit" value="Submit">
-    </form>
-
-    {%endif%}
-</body>
-</html>
+            <label for="amount">Amount:</label>
+            <input type="text" name="amount">
+    
+            <label for="date">Date:</label>
+            <input type="date" name="date">
+    
+            <label for="method">Method:</label>
+            <input type="text" name="method">
+    
+            <label for="event">Event:</label>
+            <input type="text" name="event">
+    
+            <label for="notes">Notes:</label>
+            <input type="text" name="notes">
+    
+            <input type="submit" value="Submit">
+        </form>
+        {% endif %}
+    </div>
 </body>
 </html>
