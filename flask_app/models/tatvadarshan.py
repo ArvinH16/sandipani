@@ -25,3 +25,10 @@ class Tatvadarshan:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+
+    @classmethod
+    def delete_member_tatvadarshans(cls, data):
+        query = "DELETE FROM tatvadarshans WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result

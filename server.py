@@ -1,4 +1,4 @@
-from flask_app.controllers import index, organizers, members, tatvadarshans, donations, student_sponsorships
+from flask_app.controllers import index, organizers, members, tatvadarshans, donations, student_sponsorships, sales
 from flask_app import app
 
 

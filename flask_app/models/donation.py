@@ -7,7 +7,7 @@ class Donation:
     def __init__(self, data):
         self.id = data['id']
         self.amount = data['amount']
-        self.data = data['date']
+        self.date = data['date']
         self.method = data['method']
         self.event = data['event']
         self.notes = data['notes']
@@ -20,6 +20,13 @@ class Donation:
     @classmethod
     def create_donation(cls, data):
         query = "INSERT INTO donations(amount, date, method, event, notes, member_id) VALUES (%(amount)s, %(date)s, %(method)s, %(event)s, %(notes)s, %(member_id)s);"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
+    
+    @classmethod
+    def delete_member_donations(cls, data):
+        query = "DELETE FROM donations WHERE member_id = %(member_id)s;"
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
