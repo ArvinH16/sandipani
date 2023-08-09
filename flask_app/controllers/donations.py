@@ -13,7 +13,8 @@ def render_add_donation_page(member_id):
         "member_id": member_id
     }
     member = Member.get_member(data)
-    return render_template("add_donation.html", member = member)
+    donation_type = "donation"
+    return render_template("add_donation.html", member = member, donation_type = donation_type)
 
 
 @app.route("/add_donation/donation", methods=["POST"])
@@ -24,7 +25,7 @@ def add_donation_form():
         "date": request.form['date'],
         "method": request.form['method'],
         "event": request.form['event'],
-        "notes": request.form['notes'],
+        "notes": request.form['notes']
     }
     donation = Donation.create_donation(data)
 
