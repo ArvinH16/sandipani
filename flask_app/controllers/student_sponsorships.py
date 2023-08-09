@@ -29,6 +29,6 @@ def add_student_sponsorship_form():
         "expiry_date": request.form['expiry_date'],
         "notes": request.form["notes"]
     }
-    student_scholarhip = Student_Sponsorship.create_student_sponsorship(data)
+    student_sponsorship = Student_Sponsorship.create_student_sponsorship(data)
 
     return redirect("/main_page")

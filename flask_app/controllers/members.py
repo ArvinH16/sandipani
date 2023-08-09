@@ -5,6 +5,10 @@ from flask import render_template, redirect, request, session, flash
 #from flask_app.models.admin import Admin
 from flask_app.models.member import Member
 from flask_app.models.email_list import Email_list
+from flask_app.models.student_sponsorship import Student_Sponsorship
+from flask_app.models.tatvadarshan import Tatvadarshan
+from flask_app.models.sale import Sale
+from flask_app.models.donation import Donation
 
 
 @app.route("/new_member")
@@ -119,6 +123,11 @@ def edit_member():
 @app.route("/delete_member", methods=["POST"])
 def delete_member():
     
+    Donation.delete_member_donations(request.form)
+    Sale.delete_member_sales(request.form)
+    Tatvadarshan.delete_member_tatvadarshans(request.form)
+    Student_Sponsorship.delete_member_student_sponsorships(request.form)
+    Email_list.purge_email_list_member(request.form)
     Member.delete_member(request.form)
 
     return redirect("/main_page")
