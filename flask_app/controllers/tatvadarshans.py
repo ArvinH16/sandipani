@@ -13,7 +13,9 @@ def render_add_tatvadarshan_page(member_id):
         "member_id": member_id
     }
     member = Member.get_member(data)
-    return render_template("add_donation.html", member = member)
+
+    donation_type = "tatvadarshan"
+    return render_template("add_donation.html", member = member, donation_type = donation_type)
 
 
 @app.route("/add_donation/tatvadarshan", methods=["POST"])

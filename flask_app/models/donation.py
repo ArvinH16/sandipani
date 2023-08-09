@@ -19,7 +19,7 @@ class Donation:
 
     @classmethod
     def create_donation(cls, data):
-        query = "INSERT INTO donations (amount, date, method, event, notes, created_at, updated_at, member_id) VALUES (%(amount)s, %(date)s, %(method)s, %(event)s, %(notes)s, %(created_at)s, %(updated_at)s, %(member_id)s);"
+        query = "INSERT INTO donations(amount, date, method, event, notes, member_id) VALUES (%(amount)s, %(date)s, %(method)s, %(event)s, %(notes)s, %(member_id)s);"
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
