@@ -26,7 +26,8 @@ def add_donation_form():
         "method": request.form['method'],
         "event": request.form['event'],
         "notes": request.form['notes']
-    }
+    } 
+      
     donation = Donation.create_donation(data)
 
     return redirect("/main_page")

@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Donation</title>
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+
+
+    <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    
     <style>
         body {
             font-family: Arial, sans-serif;
         }
+
         .container {
             margin-top: 40px;
         }
+
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
         }
+
         form {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         label {
             font-weight: bold;
         }
+
         input[type="text"],
         input[type="date"] {
             width: 100%;
@@ -33,6 +60,7 @@
             border: 1px solid #ced4da;
             border-radius: 4px;
         }
+
         input[type="submit"] {
             display: block;
             width: 100%;
@@ -43,14 +71,16 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="60">
+        <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="60">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -75,25 +105,39 @@
         <form action="/add_donation/tatvadarshan" method="post">
             <input type="hidden" name="member_id" value="{{member.id}}">
 
-            <label for="amount">Amount:</label>
-            <input type="text" name="amount">
-    
-            <label for="date">Date:</label>
-            <input type="date" name="date">
-    
-            <label for="method">Method:</label>
-            <input type="text" name="method">
-    
-            <label for="length">Length:</label>
-            <input type="text" name="length">
-    
-            <label for="expiry_date">Expiry Date:</label>
-            <input type="date" name="expiry_date">
-    
-            <label for="notes">Notes:</label>
-            <input type="text" name="notes">
-    
-            <input type="submit" value="Submit">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" step="0.01" min="0" placeholder="$0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="method">Method:</label>
+                <input type="text" name="method" required>
+            </div>
+
+            <div class="form-group">
+                <label for="length">Length:</label>
+                <input type="text" name="length" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiry_date">Expiry date:</label>
+                <input type="text" name="expiry_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
         </form>
         {% endif %}
 
@@ -102,49 +146,85 @@
         <form action="/add_donation/student_sponsorship" method="post">
             <input type="hidden" name="member_id" value="{{member.id}}">
 
-            <label for="amount">Amount:</label>
-            <input type="text" name="amount">
-    
-            <label for="date">Date:</label>
-            <input type="date" name="date">
-    
-            <label for="method">Method:</label>
-            <input type="text" name="method">
-    
-            <label for="length">Length:</label>
-            <input type="text" name="length">
-    
-            <label for="expiry_date">Expiry Date:</label>
-            <input type="date" name="expiry_date">
-    
-            <label for="notes">Notes:</label>
-            <input type="text" name="notes">
-    
-            <input type="submit" value="Submit">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" step="0.01" min="0" placeholder="$0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="method">Method:</label>
+                <input type="text" name="method" required>
+            </div>
+
+            <div class="form-group">
+                <label for="length">Length:</label>
+                <input type="text" name="length" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiry_date">Expiry date:</label>
+                <input type="text" name="expiry_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
         </form>
         {% endif %}
 
         {% if donation_type == "donation" %}
         <h1>Adding Donation for {{ member.first_name }}</h1>
+
+        {% with messages = get_flashed_messages(category_filter=['donation']) %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         <form action="/add_donation/donation" method="post">
             <input type="hidden" name="member_id" value="{{member.id}}">
 
-            <label for="amount">Amount:</label>
-            <input type="text" name="amount">
-    
-            <label for="date">Date:</label>
-            <input type="date" name="date">
-    
-            <label for="method">Method:</label>
-            <input type="text" name="method">
-    
-            <label for="event">Event:</label>
-            <input type="text" name="event">
-    
-            <label for="notes">Notes:</label>
-            <input type="text" name="notes">
-    
-            <input type="submit" value="Submit">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" step="0.01" min="0" placeholder="$0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="method">Method:</label>
+                <input type="text" name="method" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event">Event:</label>
+                <input type="text" name="event">
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+
         </form>
         {% endif %}
 
@@ -153,21 +233,32 @@
         <form action="/add_donation/sale" method="post">
             <input type="hidden" name="member_id" value="{{member.id}}">
 
-            <label for="amount">Amount:</label>
-            <input type="text" name="amount">
-    
-            <label for="date">Date:</label>
-            <input type="date" name="date">
-    
-            <label for="method">Method:</label>
-            <input type="text" name="method">
-    
-            <label for="notes">Notes:</label>
-            <input type="text" name="notes">
-    
-            <input type="submit" value="Submit">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" step="0.01" min="0" placeholder="$0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="method">Method:</label>
+                <input type="text" name="method" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
         </form>
         {% endif %}
     </div>
 </body>
+
 </html>
