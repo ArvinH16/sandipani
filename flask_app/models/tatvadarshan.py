@@ -21,7 +21,7 @@ class Tatvadarshan:
 
     @classmethod
     def create_tatvadarshan(cls, data):
-        query = "INSERT INTO tatvadarshans(amount, date, method, length, expiry_date, notes, member_id) VALUES(%(amount)s, %(date)s, %(method)s, %(length)s, %(expiry_date)s, %(notes)s, %(member_id)s);"
+        query = "INSERT INTO tatvadarshans(amount, date, method, `length`, expiry_date, notes, member_id) VALUES (%(amount)s, %(date)s, %(method)s, %(length)s, %(expiry_date)s, %(notes)s, %(member_id)s);"
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
