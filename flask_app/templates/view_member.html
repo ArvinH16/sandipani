@@ -86,7 +86,10 @@
             <form id="deleteMemberForm" action="/delete_member" method="post">
                 <input type="hidden" name="member_id" value="{{member.id}}">
                 <button type="submit" id="red" class="btn btn-primary">Delete member</button>
+                <a href="/view_member_donations/{{ member.id }}" class="btn btn-primary">View Donations</a>
+
             </form>
+
         </div>
 
         <form action="/edit_member" method="post">

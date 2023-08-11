@@ -108,4 +108,5 @@ class Member:
         result = connectToMySQL('sandipani').query_db(query, data)
         return result
     
+    
 

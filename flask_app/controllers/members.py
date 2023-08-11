@@ -85,8 +85,7 @@ def view_member(member_id):
 
     email_lists = Email_list.get_all_email_list()
     member = Member.get_member(data_member)
-    for test in member.email_list:
-        print(test.id)
+
     email_list_ids = []
     for email_list_joined in member.email_list:
         email_list_ids.append(email_list_joined.id)
@@ -131,3 +130,36 @@ def delete_member():
     Member.delete_member(request.form)
 
     return redirect("/main_page")
+
+@app.route("/view_member_donations/<int:member_id>")
+def get_member_donations(member_id):
+    
+    donations = Donation.get_member_donations({"member_id": member_id})
+    num_donations = 0
+    total_donation = 0
+    for donation in donations:
+        total_donation += donation['amount']
+        num_donations += 1
+    
+    sales = Sale.get_member_sales({"member_id": member_id})
+    num_sales = 0
+    total_sale = 0
+    for sale in sales:
+        total_sale += sale['amount']
+        num_sales += 1
+
+    tatvadarshans = Tatvadarshan.get_member_tatvadarshans({"member_id": member_id})
+    num_tatvadarshans = 0
+    total_tatvadarshan = 0
+    for tatvadarshan in tatvadarshans:
+        total_tatvadarshan += tatvadarshan['amount']
+        num_tatvadarshans += 1
+
+    student_sponsorships = Student_Sponsorship.get_member_student_sponsorships({"member_id": member_id})
+    num_student_sponsorships = 0
+    total_student_sponsorship = 0
+    for student_sponsorship in student_sponsorships:
+        total_student_sponsorship += student_sponsorship["amount"]
+        num_student_sponsorships += 1
+
+    return render_template("view_member_donations.html", num_donations = num_donations, total_donation = total_donation, num_sales = num_sales, total_sale = total_sale, num_tatvadarshans = num_tatvadarshans, total_tatvadarshan = total_tatvadarshan, num_student_sponsorships = num_student_sponsorships, total_student_sponsorship = total_student_sponsorship)
