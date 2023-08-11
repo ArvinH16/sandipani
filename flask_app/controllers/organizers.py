@@ -58,12 +58,37 @@ def add_organizer():
     return redirect("/pending_page")
 
 
-@app.route("/main_page")
+@app.route("/main_page", methods=['GET', 'POST'])
 def dashboard():
-    all_members = Member.get_all_members()
+    if request.method == 'POST':
+        """
+        data = {
+            "email": request.form['query']
+        }
+        all_members = Member.get_searched_members(data)
+        """
+        
+        #search_email = f"%{request.form['query']}%"
+        search_email = request.form['query']
+
+        data = {
+            "email": search_email
+        }
+        all_members = Member.get_searched_members(data)
+
+        session['search_results'] = [member.__dict__ for member in all_members]  # assuming each member object can be represented as a dictionary
+        return redirect("/search_results")
+
+    else:
+        all_members = Member.get_all_members()
 
     return render_template("dashboard.html", all_members = all_members)
 
+@app.route("/search_results")
+def search_member():
+    all_members = session.get('search_results', [])
+    return render_template("dashboard.html", all_members=all_members)
+    
 
 @app.route("/manage_organizers")
 def manage_org_page():

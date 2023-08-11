@@ -61,6 +61,7 @@
         .btn-primary a {
             color: #fff;
         }
+        
     </style>
 
 
@@ -90,14 +91,22 @@
 
     <div class="container my-3">
         <div class="row">
-            <div class="col-md-10">
-                <input class="form-control" type="search" name="query" placeholder="Search..." aria-label="Search">
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-outline-success w-100" type="submit">Search</button>
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                    <!-- Search Form -->
+                    <form action="/main_page" method="post" class="d-flex flex-grow-1">
+                        <input class="form-control flex-grow-1 mr-2" type="search" name="query" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline-success mr-2" type="submit">Search</button>
+                    </form>
+                    
+                    <!-- Show All Members Button -->
+                    <a href="/main_page" class="btn btn-primary">Show All Members</a>
+                </div>
             </div>
         </div>
     </div>
+    
+    
 
     <div class="container mt-3">
         {% for member in all_members %}
