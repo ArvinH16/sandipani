@@ -43,6 +43,22 @@ class Member:
         return all_member_objects
 
     @classmethod
+    def get_searched_members(cls, data):
+        #query = "SELECT * FROM members WHERE email LIKE '%a%';"
+        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0;"
+        #query = "SELECT * FROM members WHERE CHARINDEX(%(email)s, email) > 0;"
+
+        result = connectToMySQL('sandipani').query_db(query, data)
+        all_searched_member_objects = []
+
+        for member in result:
+            searched_member_object = cls(member)
+            all_searched_member_objects.append(searched_member_object)
+
+        return all_searched_member_objects
+
+
+    @classmethod
     def add_member(cls, data):
         #Add admin id from session later when we protect pages
         #add email list when fixed
