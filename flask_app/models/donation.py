@@ -30,6 +30,13 @@ class Donation:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+    
+    @classmethod
+    def get_member_donations(cls, data):
+        query = "SELECT * FROM donations WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
 
 
 

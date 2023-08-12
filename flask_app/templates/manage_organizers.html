@@ -97,6 +97,13 @@
         .btn-primary a {
             color: #fff;
         }
+
+        .nav-item-style {
+            font-size: 18px;
+            color: white;
+            transition: color 0.3s ease-in;
+            font-weight: 800;
+        }
     </style>
 
     <!-- Your JS functions here... -->
@@ -105,23 +112,22 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="60">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #343a40;">
+        <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="70">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="/main_page">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/new_member">Add Member</a></li>
-                <li class="nav-item"><a class="nav-link" href="/manage_organizers">Manage Organizers</a></li>
-                <li class="nav-item"><a class="nav-link" href="/manage_events">Manage Events</a></li>
-
+                <li ><a class="nav-link nav-item-style" style="color: white" href="/main_page">Home</a></li>
+                <li ><a class="nav-link nav-item-style" style="color: white" href="/new_member">Add Member</a></li>
+                <li class="nav-item"><a class="nav-link nav-item-style" style="color: white" href="/manage_organizers">Manage Organizers</a></li>
+                <li class="nav-item"><a class="nav-link nav-item-style" style="color: white" href="/manage_events">Manage Events</a></li>
                 <li class="nav-item">
                     <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
                         width="30" height="30">
-                    <span class="navbar-text">admin</span>
+                    <span style="color: white" class="navbar-text navbar-text-style">Admin</span>
                 </li>
             </ul>
         </div>

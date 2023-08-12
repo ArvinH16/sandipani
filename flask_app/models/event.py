@@ -24,3 +24,10 @@ class Event:
         result = connectToMySQL('sandipani').query_db(query)
 
         return result
+    
+    @classmethod
+    def delete_event(cls, data):
+        query = "DELETE FROM `events` WHERE id = %(event_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result

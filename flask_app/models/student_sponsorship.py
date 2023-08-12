@@ -32,3 +32,10 @@ class Student_Sponsorship:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+        
+    @classmethod
+    def get_member_student_sponsorships(cls, data):
+        query = "SELECT * FROM student_sponsorships WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result

@@ -21,3 +21,12 @@ def add_event():
     event = Event.add_event(data)
 
     return redirect("/manage_events")
+
+@app.route("/delete_event/<int:event_id>")
+def delete_event(event_id):
+    data = {
+        "event_id": event_id
+    }
+    Event.delete_event(data)
+
+    return redirect("/manage_events")
