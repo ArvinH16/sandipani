@@ -11,66 +11,70 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
         .navbar-brand {
             font-size: 1.5em;
         }
-        .nav-item a {
-            color: #000;
+        .navbar {
+            background-color: #343a40;
         }
-        .nav-item a:hover {
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #fff;
+        }
+        .navbar-nav .nav-item a {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            transition: color 0.3s ease-in;
+        }
+        .navbar-nav .nav-item a:hover {
             color: #007bff;
         }
-        .row > div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-primary a {
-            color: #fff;
-        }
-
-        /* Custom styles for the form */
         .form-container {
             max-width: 400px;
             margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
-
-        /* Smaller input fields */
         input[type="text"],
         input[type="email"],
         input[type="password"] {
             font-size: 14px;
-            padding: 5px 10px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
         }
-
-        .nav-item-style {
-        font-size: 18px;
-        color: white;
-        transition: color 0.3s ease-in;
-        font-weight: 800;
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease-in;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #343a40;">
-        <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="70">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="70" alt="Logo">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item-style"><a class="nav-link" style="color: white" href="/sign_up">Sign up</a></li>
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
-                        width="30" height="30">
-                    <span style="color: white" class="navbar-text navbar-text-style">Admin</span>
+                    <a class="nav-link" href="/sign_up">Sign up</a>
                 </li>
             </ul>
         </div>
@@ -78,6 +82,8 @@
 
     <!-- Form -->
     <div class="container my-4 form-container">
+        <h2 class="text-center">Welcome to Sandipani!</h2>
+        <p class="text-center">Please Sign in below:</p>
         <form action="/organizer_login" method="post">
             {% with messages = get_flashed_messages(category_filter=['login']) %}
             {% if messages %}
@@ -88,14 +94,13 @@
             {% endwith %}
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" name="email" placeholder="Email">
+                <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
-
-            <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
         </form>
     </div>
 </body>
