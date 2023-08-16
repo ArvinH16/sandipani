@@ -147,4 +147,3 @@ def delete_organizer():
     return redirect("/manage_organizers")
 
 
-        

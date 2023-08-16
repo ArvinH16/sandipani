@@ -39,3 +39,17 @@ class Student_Sponsorship:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+    
+    @classmethod
+    def get_student_sponsorship_sum(cls):
+        query = "SELECT SUM(amount) AS total_amount FROM student_sponsorships;"
+        result = connectToMySQL('sandipani').query_db(query)
+
+        return result
+    
+    @classmethod
+    def get_num_student_sponsorships(cls):
+        query = "SELECT COUNT(*) AS donation_count FROM student_sponsorships;"
+        result = connectToMySQL('sandipani').query_db(query)
+        
+        return result

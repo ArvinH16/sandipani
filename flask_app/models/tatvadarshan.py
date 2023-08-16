@@ -39,3 +39,17 @@ class Tatvadarshan:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+
+    @classmethod
+    def get_tatvadarshan_sum(cls):
+        query = "SELECT SUM(amount) AS total_amount FROM tatvadarshans;"
+        result = connectToMySQL('sandipani').query_db(query)
+
+        return result
+    
+    @classmethod
+    def get_num_tatvadarshans(cls):
+        query = "SELECT COUNT(*) AS donation_count FROM tatvadarshans;"
+        result = connectToMySQL('sandipani').query_db(query)
+        
+        return result

@@ -36,3 +36,17 @@ class Sale:
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
+    
+    @classmethod
+    def get_sale_sum(cls):
+        query = "SELECT SUM(amount) AS total_amount FROM sales;"
+        result = connectToMySQL('sandipani').query_db(query)
+
+        return result
+    
+    @classmethod
+    def get_num_sales(cls):
+        query = "SELECT COUNT(*) AS donation_count FROM sales;"
+        result = connectToMySQL('sandipani').query_db(query)
+        
+        return result
