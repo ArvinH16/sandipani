@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandipani - Stats</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .col-md-6 {
+            flex-basis: 48%;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .total-amount {
+            font-size: 18px;
+            color: #888888;
+        }
+
+        .navbar {
+        background-color: #343a40;
+        margin-bottom: 30px; /* To match spacing in the original example */
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .navbar-nav .nav-item a {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 20px; /* Adjust padding for the navbar links */
+            transition: color 0.3s ease-in;
+        }
+
+        .navbar-nav .nav-item a:hover {
+            color: #007bff;
+        }
+
+        .navbar-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 15px; /* Add some right margin to align with other elements */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="70" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/main_page">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/new_member">Add Member</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/manage_organizers">Manage Organizers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/manage_events">Manage Events</a>
+                </li>
+                <li class="nav-item">
+                    <img class="rounded-circle mr-2"
+                        src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <span>Admin</span>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Donation Dashboard -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section">
+                    <h1>Donations:</h1>
+                    <p>Number of Donations: <span class="number">{{donation_count[0]['donation_count']}}</span></p>                    
+                    {% if donation_sum[0]['total_amount'] == None %}
+                    <p class="total-amount">Total Donation Amount: $0.00</p>
+                    {%else%}
+                    <p class="total-amount">Total Donation Amount: ${{donation_sum[0]['total_amount']}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="section">
+                    <h1>Tatvadarshans:</h1>
+                    <p>Number of Tatvadarshans: <span class="number">{{tatvadarshan_count[0]['donation_count']}}</span></p>                    
+                    {% if tatvadarshan_sum[0]['total_amount'] == None %}
+                    <p class="total-amount">Total Tatvadarshan Amount: $0.00</p>
+                    {%else%}
+                    <p class="total-amount">Total Tatvadarshan Amount: ${{tatvadarshan_sum[0]['total_amount']}}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section">
+                    <h1>Student Sponsorships:</h1>
+                    <p>Number of Student Sponsorships: <span class="number">{{student_sponsorship_count[0]['donation_count']}}</span></p>                    
+                    {% if student_sponsorship_sum[0]['total_amount'] == None %}
+                    <p class="total-amount">Total Student Sponsorship Amount: $0.00</p>
+                    {%else%}
+                    <p class="total-amount">Total Student Sponsorship Amount: ${{student_sponsorship_sum[0]['total_amount']}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="section">
+                    <h1>Sales:</h1>
+                    <p>Number of Sales: <span class="number">{{sale_count[0]['donation_count']}}</span></p>                    
+                    {% if sale_sum[0]['total_amount'] == None %}
+                    <p class="total-amount">Total Sale Amount: $0.00</p>
+                    {%else%}
+                    <p class="total-amount">Total Sale Amount: ${{sale_sum[0]['total_amount']}}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
