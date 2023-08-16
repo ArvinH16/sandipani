@@ -162,4 +162,16 @@ def get_member_donations(member_id):
         total_student_sponsorship += student_sponsorship["amount"]
         num_student_sponsorships += 1
 
-    return render_template("view_member_donations.html", num_donations = num_donations, total_donation = total_donation, num_sales = num_sales, total_sale = total_sale, num_tatvadarshans = num_tatvadarshans, total_tatvadarshan = total_tatvadarshan, num_student_sponsorships = num_student_sponsorships, total_student_sponsorship = total_student_sponsorship)
+    return render_template("view_member_donations.html",
+        num_donations = num_donations,
+        total_donation = total_donation, 
+        num_sales = num_sales, 
+        total_sale = total_sale, 
+        num_tatvadarshans = num_tatvadarshans, 
+        total_tatvadarshan = total_tatvadarshan, 
+        num_student_sponsorships = num_student_sponsorships, 
+        total_student_sponsorship = total_student_sponsorship,
+        donations = donations,
+        tatvadarshans = tatvadarshans,
+        sales = sales,
+        student_sponsorships = student_sponsorships)

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!--  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!--  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <style>
         body {
@@ -54,8 +58,9 @@
         }
 
         .navbar {
-        background-color: #343a40;
-        margin-bottom: 30px; /* To match spacing in the original example */
+            background-color: #343a40;
+            margin-bottom: 30px;
+            /* To match spacing in the original example */
         }
 
         .navbar-dark .navbar-toggler-icon {
@@ -66,7 +71,8 @@
             color: #fff;
             font-size: 18px;
             font-weight: 600;
-            padding: 15px 20px; /* Adjust padding for the navbar links */
+            padding: 15px 20px;
+            /* Adjust padding for the navbar links */
             transition: color 0.3s ease-in;
         }
 
@@ -78,10 +84,18 @@
             color: #fff;
             font-size: 18px;
             font-weight: 600;
-            margin-right: 15px; /* Add some right margin to align with other elements */
+            margin-right: 15px;
+            /* Add some right margin to align with other elements */
+        }
+
+        /* 
+         */
+        .no-flex-align {
+            align-items: flex-start;
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -107,8 +121,8 @@
                     <a class="nav-link" href="/manage_events">Manage Events</a>
                 </li>
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2"
-                        src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
                     <span>Admin</span>
             </ul>
         </div>
@@ -116,38 +130,134 @@
 
     <!-- Donation Dashboard -->
     <div class="container">
-        <div class="row">
+        <div class="row no-flex-align">
+            <!-- ... -->
             <div class="col-md-6">
                 <div class="section">
                     <h1>Donations</h1>
                     <p>Number of Donations: <span class="number">{{num_donations}}</span></p>
                     <p class="total-amount">Total Donation Amount: ${{total_donation}}</p>
+
+                    <!-- Add button for collapsing content -->
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#donationsCollapse"
+                        aria-expanded="false" aria-controls="donationsCollapse">
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+
+                    <!-- Collapsible content -->
+                    <div class="collapse" id="donationsCollapse">
+                        <div class="card card-body">
+                            {%for donation in donations%}
+                            <p><strong>Amount:</strong> {{donation.amount}}</p>
+                            <p><strong>Method:</strong> {{donation.method}}</p>
+                            <p><strong>Date:</strong> {{donation.date}}</p>
+                            <p><strong>Event:</strong> {{donation.event}}</p>
+                            <p><strong>Notes:</strong> {{donation.notes}}</p>
+                            <hr> <!-- Divider for each donation -->
+                            {%endfor%}
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- ... -->
+
             <div class="col-md-6">
                 <div class="section">
                     <h1>Tatvadarshans</h1>
                     <p>Number of Tatvadarshans: <span class="number">{{num_tatvadarshans}}</span></p>
-                    <p class="total-amount">Total Tatvadarshan Amount: ${{total_tatvadarshan}}</p>
+                    <p class="total-amount">Total Tatvadarshan Amount: ${{total_tatvadarshans}}</p>
+
+                    <!-- Add button for collapsing content -->
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#tatCollapse"
+                        aria-expanded="false" aria-controls="tatCollapse">
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+
+                    <!-- Collapsible content -->
+                    <div class="collapse" id="tatCollapse">
+                        <div class="card card-body">
+                            {%for tatvadarshan in tatvadarshans%}
+                            <p><strong>Amount:</strong> {{tatvadarshan.amount}}</p>
+                            <p><strong>Method:</strong> {{tatvadarshan.method}}</p>
+                            <p><strong>Date:</strong> {{tatvadarshan.date}}</p>
+                            <p><strong>Length:</strong> {{tatvadarshan.length}}</p>
+                            <p><strong>Expiry Date:</strong> {{tatvadarshan.expiry_date}}</p>
+                            <p><strong>Notes:</strong> {{tatvadarshan.notes}}</p>
+                            <hr> <!-- Divider for each donation -->
+                            {%endfor%}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row no-flex-align">
             <div class="col-md-6">
                 <div class="section">
                     <h1>Student Sponsorships</h1>
                     <p>Number of Student Sponsorships: <span class="number">{{num_student_sponsorships}}</span></p>
                     <p class="total-amount">Total Student Sponsorship Amount: ${{total_student_sponsorship}}</p>
+
+                    <!-- Add button for collapsing content -->
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ssCollapse"
+                        aria-expanded="false" aria-controls="ssCollapse">
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+
+                    <!-- Collapsible content -->
+                    <div class="collapse" id="ssCollapse">
+                        <div class="card card-body">
+                            {%for student_sponsorship in student_sponsorships%}
+                            <p><strong>Amount:</strong> {{student_sponsorship.amount}}</p>
+                            <p><strong>Method:</strong> {{student_sponsorship.method}}</p>
+                            <p><strong>Date:</strong> {{student_sponsorship.date}}</p>
+                            <p><strong>Length:</strong> {{student_sponsorship.length}}</p>
+                            <p><strong>Expiry Date:</strong> {{student_sponsorship.expiry_date}}</p>
+                            <p><strong>Notes:</strong> {{student_sponsorship.notes}}</p>
+                            <hr> <!-- Divider for each donation -->
+                            {%endfor%}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="section">
-                    <h1>Sales</h1>
+                    <h1>Donations</h1>
                     <p>Number of Sales: <span class="number">{{num_sales}}</span></p>
-                    <p class="total-amount">Total Sales Amount: ${{total_sale}}</p>
+                    <p class="total-amount">Total Sales Amount: ${{total_sales}}</p>
+
+                    <!-- Add button for collapsing content -->
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#salesCollapse"
+                        aria-expanded="false" aria-controls="salesCollapse">
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+
+                    <!-- Collapsible content -->
+                    <div class="collapse" id="salesCollapse">
+                        <div class="card card-body">
+                            {%for donation in donations%}
+                            <p><strong>Amount:</strong> {{donation.amount}}</p>
+                            <p><strong>Method:</strong> {{donation.method}}</p>
+                            <p><strong>Date:</strong> {{donation.date}}</p>
+                            <p><strong>Event:</strong> {{donation.event}}</p>
+                            <p><strong>Notes:</strong> {{donation.notes}}</p>
+                            <p><strong>Date:</strong> {{donation.date}}</p>
+                            <hr> <!-- Divider for each donation -->
+                            {%endfor%}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="collapse"]').click(function () {
+                $(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+            });
+        });
+    </script>
+
 </body>
+
 </html>
