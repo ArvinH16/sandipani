@@ -9,6 +9,9 @@ from flask_app.models.student_sponsorship import Student_Sponsorship
 
 @app.route("/add_donation/student_sponsorship/<int:member_id>")
 def render_add_student_sponsorship_page(member_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     data = {
         "member_id": member_id
     }
@@ -20,6 +23,9 @@ def render_add_student_sponsorship_page(member_id):
 
 @app.route("/add_donation/student_sponsorship", methods=["POST"])
 def add_student_sponsorship_form():
+    if not 'organizer_id' in session:
+        return redirect("/")
+        
     data = {
         "member_id": request.form["member_id"],
         "amount": request.form["amount"],

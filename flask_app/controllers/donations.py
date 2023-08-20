@@ -9,6 +9,9 @@ from flask_app.models.donation import Donation
 
 @app.route("/add_donation/donation/<int:member_id>")
 def render_add_donation_page(member_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "member_id": member_id
     }
@@ -19,6 +22,9 @@ def render_add_donation_page(member_id):
 
 @app.route("/add_donation/donation", methods=["POST"])
 def add_donation_form():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "member_id": request.form["member_id"],
         "amount": request.form["amount"],

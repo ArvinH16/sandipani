@@ -7,6 +7,9 @@ from flask_app.models.sale import Sale
 
 @app.route("/add_donation/sale/<int:member_id>")
 def render_add_sale_page(member_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "member_id": member_id
     }
@@ -17,6 +20,9 @@ def render_add_sale_page(member_id):
 
 @app.route("/add_donation/sale", methods=["POST"])
 def add_sale_form():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "member_id": request.form["member_id"],
         "amount": request.form["amount"],

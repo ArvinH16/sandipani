@@ -9,6 +9,9 @@ from flask_app.models.tatvadarshan import Tatvadarshan
 
 @app.route("/add_donation/tatvadarshan/<int:member_id>")
 def render_add_tatvadarshan_page(member_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     data = {
         "member_id": member_id
     }
@@ -20,6 +23,10 @@ def render_add_tatvadarshan_page(member_id):
 
 @app.route("/add_donation/tatvadarshan", methods=["POST"])
 def add_tatvadarshan_form():
+
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "member_id": request.form["member_id"],
         "amount": request.form["amount"],

@@ -4,15 +4,24 @@ from flask_app.models.event import Event
 
 @app.route("/manage_events")
 def manage_events_page():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     all_events = Event.get_all_events()
     return render_template("manage_events.html", all_events = all_events)
 
 @app.route("/add_event_page")
 def render_add_event_page():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     return render_template("add_event.html")
 
 @app.route("/add_event", methods=['POST'])
 def add_event():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "event_name": request.form['event_name'],
         "event_date": request.form['event_date'],
@@ -24,6 +33,9 @@ def add_event():
 
 @app.route("/delete_event/<int:event_id>")
 def delete_event(event_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "event_id": event_id
     }

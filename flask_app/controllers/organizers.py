@@ -26,6 +26,7 @@ def login():
         return redirect('/')
 
     session['organizer_id'] = organizer.id
+
     return redirect("/main_page")
 
 
@@ -60,6 +61,9 @@ def add_organizer():
 
 @app.route("/main_page", methods=['GET', 'POST'])
 def dashboard():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     if request.method == 'POST':
         """
         data = {
@@ -69,6 +73,7 @@ def dashboard():
         """
         
         #search_email = f"%{request.form['query']}%"
+
         search_email = request.form['query']
 
         data = {
@@ -86,12 +91,18 @@ def dashboard():
 
 @app.route("/search_results")
 def search_member():
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     all_members = session.get('search_results', [])
-    return render_template("dashboard.html", all_members=all_members)
+    return render_template("dashboard.html", all_members = all_members)
     
 
 @app.route("/manage_organizers")
 def manage_org_page():
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     pending_organizers = Organizer.get_all_pending_organizers()
     all_organizers = Organizer.get_all_organizers()
 
@@ -99,6 +110,9 @@ def manage_org_page():
 
 @app.route("/pend_org_form", methods=['POST'])
 def process_pend_org_form():
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     data = {
         "id": request.form["pending_organizers_id"],
         "updated_role": request.form["role"],
@@ -114,6 +128,10 @@ def process_pend_org_form():
     
 @app.route("/update_organizer", methods=['POST'])
 def update_organizer():
+
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "id": request.form["organizer_id"],
         "updated_role": request.form["role"],
@@ -135,6 +153,10 @@ def update_organizer():
 
 @app.route("/delete_organizer", methods=["POST"])
 def delete_organizer():
+
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data = {
         "id": request.form["organizer_id"],
         "first_name": request.form['organizer_first_name']

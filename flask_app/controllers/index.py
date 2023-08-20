@@ -15,7 +15,6 @@ def main_page():
     #pw_hash = bcrypt.generate_password_hash(password)
     #print(pw_hash)
     #hash_pass = "$2b$12$nYg0ahAbsb41kldxuJQO9OXjMk2.iUIQ1r3RvdSfcy1BVXyUvZEZ2"
-
     return render_template("index.html")
     
 
@@ -26,6 +25,10 @@ def pending_page():
 
 @app.route("/stats")
 def render_stats():
+
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     donation_sum = Donation.get_donation_sum()
     donation_count = Donation.get_num_donations()
     sale_sum = Sale.get_sale_sum()

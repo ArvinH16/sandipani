@@ -13,6 +13,9 @@ from flask_app.models.donation import Donation
 
 @app.route("/new_member")
 def new_member_page():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     email_lists = Email_list.get_all_email_list()
     return render_template("new_member_page.html", email_lists = email_lists)
 
@@ -20,7 +23,9 @@ def new_member_page():
 @app.route("/add_member", methods=["POST"])
 def add_member():
     
-
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
     data_member = {
         "first_name": request.form['first_name'],
         "middle_name": request.form['middle_name'],
@@ -65,6 +70,11 @@ def add_member():
 
 @app.route("/view_member/<int:member_id>")
 def view_member(member_id):
+
+    if not 'organizer_id' in session:
+        return redirect("/")
+
+    
     data_member = {
         "member_id": member_id
     }
@@ -95,6 +105,10 @@ def view_member(member_id):
 @app.route("/edit_member", methods=["POST"])
 def edit_member():
     
+    if not 'organizer_id' in session:
+        return redirect("/")
+
+    
     Member.edit_member(request.form)
 
     Email_list.purge_email_list_member(request.form)
@@ -121,6 +135,9 @@ def edit_member():
 
 @app.route("/delete_member", methods=["POST"])
 def delete_member():
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     
     Donation.delete_member_donations(request.form)
     Sale.delete_member_sales(request.form)
@@ -133,6 +150,9 @@ def delete_member():
 
 @app.route("/view_member_donations/<int:member_id>")
 def get_member_donations(member_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+
     
     donations = Donation.get_member_donations({"member_id": member_id})
     num_donations = 0
