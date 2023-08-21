@@ -4,6 +4,7 @@ from flask_app.models.donation import Donation
 from flask_app.models.tatvadarshan import Tatvadarshan
 from flask_app.models.student_sponsorship import Student_Sponsorship
 from flask_app.models.sale import Sale
+from flask_app.models.member import Member
 #from flask_app.models.thought import Thought
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -37,7 +38,9 @@ def render_stats():
     tatvadarshan_count = Tatvadarshan.get_num_tatvadarshans()
     student_sponsorship_sum = Student_Sponsorship.get_student_sponsorship_sum()
     student_sponsorship_count = Student_Sponsorship.get_num_student_sponsorships()
+    member_count = Member.get_member_count()
+    archived_member_count = Member.get_archived_member_count()
 
     print(donation_count)
 
-    return render_template("stats.html", donation_sum = donation_sum, donation_count = donation_count, sale_sum = sale_sum, sale_count = sale_count, tatvadarshan_sum = tatvadarshan_sum, tatvadarshan_count = tatvadarshan_count, student_sponsorship_sum = student_sponsorship_sum, student_sponsorship_count = student_sponsorship_count)
+    return render_template("stats.html", donation_sum = donation_sum, donation_count = donation_count, sale_sum = sale_sum, sale_count = sale_count, tatvadarshan_sum = tatvadarshan_sum, tatvadarshan_count = tatvadarshan_count, student_sponsorship_sum = student_sponsorship_sum, student_sponsorship_count = student_sponsorship_count, member_count = member_count, archived_member_count = archived_member_count)

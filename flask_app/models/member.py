@@ -30,7 +30,7 @@ class Member:
 
     @classmethod
     def get_all_members(cls):
-        query = "SELECT * FROM members"
+        query = "SELECT * FROM members WHERE is_deleted = 0"
         result = connectToMySQL('sandipani').query_db(query)
 
         all_member_objects = []
@@ -42,10 +42,26 @@ class Member:
 
         return all_member_objects
 
+
+    @classmethod
+    def get_all_archived_members(cls):
+        query = "SELECT * FROM members WHERE is_deleted = 1"
+        result = connectToMySQL('sandipani').query_db(query)
+
+        all_member_objects = []
+
+        for member in result:
+            member_object = cls(member)
+
+            all_member_objects.append(member_object)
+
+        return all_member_objects
+    
+
     @classmethod
     def get_searched_members(cls, data):
         #query = "SELECT * FROM members WHERE email LIKE '%a%';"
-        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0;"
+        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0 AND is_deleted = 0;"
         #query = "SELECT * FROM members WHERE CHARINDEX(%(email)s, email) > 0;"
 
         result = connectToMySQL('sandipani').query_db(query, data)
@@ -57,6 +73,21 @@ class Member:
 
         return all_searched_member_objects
 
+
+    @classmethod
+    def get_searched_archived_members(cls, data):
+        #query = "SELECT * FROM members WHERE email LIKE '%a%';"
+        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0 AND is_deleted = 1;"
+        #query = "SELECT * FROM members WHERE CHARINDEX(%(email)s, email) > 0;"
+
+        result = connectToMySQL('sandipani').query_db(query, data)
+        all_searched_member_objects = []
+
+        for member in result:
+            searched_member_object = cls(member)
+            all_searched_member_objects.append(searched_member_object)
+
+        return all_searched_member_objects
 
     @classmethod
     def add_member(cls, data):
@@ -119,10 +150,35 @@ class Member:
 
     @classmethod
     def delete_member(cls, data):
+        # query = "DELETE FROM members WHERE id = %(member_id)s;"
+        query =  "UPDATE members SET is_deleted = 1 WHERE id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        return result
+    
+    @classmethod
+    def purge_member(cls, data):
         query = "DELETE FROM members WHERE id = %(member_id)s;"
-        email_list.Email_list.purge_email_list_member(data)
         result = connectToMySQL('sandipani').query_db(query, data)
         return result
     
     
-
+    @classmethod
+    def get_member_count(cls):
+        query = "SELECT COUNT(*) AS member_count FROM members WHERE is_deleted = 0;"
+        result = connectToMySQL('sandipani').query_db(query)
+        
+        return result
+    
+    @classmethod
+    def get_archived_member_count(cls):
+        query = "SELECT COUNT(*) AS member_count FROM members WHERE is_deleted = 1;"
+        result = connectToMySQL('sandipani').query_db(query)
+        
+        return result
+    
+    @classmethod
+    def unarchive_member(cls, data):
+        query = "UPDATE members SET is_deleted = 0 WHERE id = %(member_id)s"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        
+        return result
