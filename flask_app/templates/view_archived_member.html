@@ -2,26 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>Add Member</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Member</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
         body {
             font-family: Arial, sans-serif;
         }
 
-        .row>div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary a {
-            color: #fff;
+        .navbar-brand {
+            font-size: 1.5em;
         }
 
         .navbar {
@@ -42,11 +37,46 @@
         .navbar-nav .nav-item a:hover {
             color: #007bff;
         }
+
+        .container {
+            padding: 20px;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        #red {
+            background-color: red;
+            border-color: red;
+        }
     </style>
+
+    <script>
+        window.onload = function () {
+            var deleteForm = document.getElementById('deleteMemberForm');
+
+            deleteForm.onsubmit = function (e) {
+                var confirmation = confirm('Are you sure you want to PERMANENTLY delete this member and all their donation and email list info?');
+                if (!confirmation) {
+                    e.preventDefault();
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
-
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">
             <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="70" alt="Logo">
@@ -82,113 +112,117 @@
             </ul>
         </div>
     </nav>
-    
+
     <!-- Form -->
     <div class="container my-4">
-        <form action="/add_member" method="post">
+        <div class="text-right mb-3">
+            <form id="deleteMemberForm" action="/purge_member" method="post">
+                <input type="hidden" name="member_id" value="{{member.id}}">
+                <button type="submit" id="red" class="btn btn-primary">Delete member</button>
+                <a href="/view_member_donations/{{ member.id }}" class="btn btn-primary">View Donations</a>
+            </form>
+        </div>
+
+        <form action="/edit_member" method="post">
+            <input type="hidden" name="member_id" value="{{member.id}}">
+            
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="first_name">First name:</label>
-                    <input type="text" class="form-control" name="first_name" placeholder="First name" required>
+                    <input type="text" class="form-control" name="first_name" value="{{member.first_name}}" required readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="middle_name">Middle Name:</label>
-                    <input type="text" class="form-control" name="middle_name" placeholder="Middle name">
+                    <input type="text" class="form-control" name="middle_name" value="{{member.middle_name}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control" name="last_name" placeholder="Last name" required>
+                    <input type="text" class="form-control" name="last_name" value="{{member.last_name}}" required readonly>
                 </div>
             </div>
-            <!--  -->
-
+        
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    <input type="email" class="form-control" name="email" value="{{member.email}}" required readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="phone_1">Phone 1:</label>
-                    <input type="text" class="form-control" name="phone_1" placeholder="Phone 1">
+                    <input type="text" class="form-control" name="phone_1" value="{{member.phone_1}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="phone_2">Phone 2:</label>
-                    <input type="text" class="form-control" name="phone_2" placeholder="Phone 2" required>
+                    <input type="text" class="form-control" name="phone_2" value="{{member.phone_2}}" readonly>
                 </div>
             </div>
-            <!--  -->
-
+        
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street_1">Street 1:</label>
-                    <input type="text" class="form-control" name="street_1" placeholder="Street 1">
+                    <input type="text" class="form-control" name="street_1" value="{{member.street_1}}" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="street_2">Street 2:</label>
-                    <input type="text" class="form-control" name="street_2" placeholder="Street 2">
+                    <input type="text" class="form-control" name="street_2" value="{{member.street_2}}" readonly>
                 </div>
             </div>
-            <!--  -->
+        
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="city">City:</label>
-                    <input type="text" class="form-control" name="city" placeholder="City">
+                    <input type="text" class="form-control" name="city" value="{{member.city}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="state">State:</label>
-                    <input type="text" class="form-control" name="state" placeholder="State">
+                    <input type="text" class="form-control" name="state" value="{{member.state}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="zip">Zip code:</label>
-                    <input type="text" class="form-control" name="zip" placeholder="Zip code">
+                    <input type="text" class="form-control" name="zip" value="{{member.zip}}" readonly>
                 </div>
             </div>
-            <!--  -->
-
-
+        
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="country">Country:</label>
-                    <input type="text" class="form-control" name="country" placeholder="country">
+                    <input type="text" class="form-control" name="country" value="{{member.country}}" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="children">Children:</label>
-                    <input type="text" class="form-control" name="children" placeholder="Children">
+                    <input type="text" class="form-control" name="children" value="{{member.children}}" readonly>
                 </div>
             </div>
-
+        
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="spouse">Spouse:</label>
-                    <input type="text" class="form-control" name="spouse" placeholder="Spouse">
+                    <input type="text" class="form-control" name="spouse" value="{{member.spouse}}" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="parents">Parents:</label>
-                    <input type="text" class="form-control" name="parents" placeholder="Parents">
+                    <input type="text" class="form-control" name="parents" value="{{member.parents}}" readonly>
                 </div>
             </div>
-
+        
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="notes">Notes:</label>
-                    <input type="text" class="form-control" name="notes" placeholder="Notes">
+                    <input type="text" class="form-control" name="notes" value="{{member.notes}}" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="email_list">Email list:</label>
                     <div class="d-flex flex-wrap">
                         {%for email_list in email_lists%}
                             <div class="form-check mr-3">
-                                <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}">
+                                <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}" {%if email_list.id in email_list_ids%}checked{%endif%} disabled>
                                 <label class="form-check-label" for="email_list">{{email_list.type}}</label>
                             </div>
                         {%endfor%}
                     </div>
                 </div>
             </div>
-            <!-- You can add rest of your form fields using the same structure -->
-
-            <button type="submit" class="btn btn-primary mt-3">Add member!</button>
         </form>
+        
     </div>
 </body>
 

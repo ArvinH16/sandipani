@@ -169,3 +169,41 @@ def delete_organizer():
     return redirect("/manage_organizers")
 
 
+@app.route("/archived_members", methods=['GET', 'POST'])
+def archived_page():
+    if not 'organizer_id' in session:
+        return redirect("/")
+    
+    if request.method == 'POST':
+        """
+        data = {
+            "email": request.form['query']
+        }
+        all_members = Member.get_searched_members(data)
+        """
+        
+        #search_email = f"%{request.form['query']}%"
+
+        search_email = request.form['query']
+
+        data = {
+            "email": search_email
+        }
+        all_members = Member.get_searched_archived_members(data)
+
+        session['search_results'] = [member.__dict__ for member in all_members]  # assuming each member object can be represented as a dictionary
+        return redirect("/archived_search_results")
+
+    else:
+        all_archived_members = Member.get_all_archived_members()
+
+    return render_template("archived_member_dashboard.html", all_archived_members = all_archived_members)
+
+
+@app.route("/archived_search_results")
+def search_archived_member():
+    if not 'organizer_id' in session:
+        return redirect("/")
+
+    all_members = session.get('search_results', [])
+    return render_template("archived_member_dashboard.html", all_members = all_members)

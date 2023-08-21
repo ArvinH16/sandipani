@@ -79,20 +79,6 @@ def view_member(member_id):
         "member_id": member_id
     }
 
-
-    """
-    email_lists = Email_list.get_all_email_list()
-
-    email_lists_checked = Email_list.get_member_email_lists(data_member)
-    print(email_lists_checked)
-    # email_list_ids_checked_list = []
-    # for email_list_id_checked in email_list_ids_checked:
-    #     email_list_ids_checked_list.append(email_list_id_checked.id)
-    email_list_ids = []
-    for email_list_checked in email_lists_checked:
-        email_list_ids.append(email_list_checked['email_list_id'])
-    """
-
     email_lists = Email_list.get_all_email_list()
     member = Member.get_member(data_member)
 
@@ -101,6 +87,26 @@ def view_member(member_id):
         email_list_ids.append(email_list_joined.id)
     
     return render_template("view_member.html", member = member, email_lists = email_lists, email_list_ids = email_list_ids)
+
+@app.route("/view_archived_member/<int:member_id>")
+def view_archived_member(member_id):
+
+    if not 'organizer_id' in session:
+        return redirect("/")
+
+    
+    data_member = {
+        "member_id": member_id
+    }
+
+    email_lists = Email_list.get_all_email_list()
+    member = Member.get_member(data_member)
+
+    email_list_ids = []
+    for email_list_joined in member.email_list:
+        email_list_ids.append(email_list_joined.id)
+    
+    return render_template("view_archived_member.html", member = member, email_lists = email_lists, email_list_ids = email_list_ids)
 
 @app.route("/edit_member", methods=["POST"])
 def edit_member():
@@ -114,8 +120,6 @@ def edit_member():
     Email_list.purge_email_list_member(request.form)
 
     email_list_checkboxes = request.form.getlist('email_list')
-
-    print(email_list_checkboxes)
 
 #    member_email_lists = Email_list.get_member_email_lists(request.form['member_id'])
     
@@ -138,21 +142,41 @@ def delete_member():
     if not 'organizer_id' in session:
         return redirect("/")
 
-    
-    Donation.delete_member_donations(request.form)
-    Sale.delete_member_sales(request.form)
-    Tatvadarshan.delete_member_tatvadarshans(request.form)
-    Student_Sponsorship.delete_member_student_sponsorships(request.form)
-    Email_list.purge_email_list_member(request.form)
     Member.delete_member(request.form)
 
     return redirect("/main_page")
+
+@app.route("/purge_member", methods=["POST"])
+def purge_member():
+    if not 'organizer_id' in session:
+        return redirect("/")  
+    
+    Donation.delete_member_donations(request.form)
+    Tatvadarshan.delete_member_tatvadarshans(request.form)
+    Student_Sponsorship.delete_member_student_sponsorships(request.form)
+    Sale.delete_member_sales(request.form)
+    Email_list.purge_email_list_member(request.form)
+
+    Member.purge_member(request.form)
+
+    return redirect("/archived_members")
+
+
+@app.route("/unarchive_member/<int:member_id>")
+def unarchive_member(member_id):
+    if not 'organizer_id' in session:
+        return redirect("/")
+    data = {
+        'member_id': member_id
+    }
+    Member.unarchive_member(data)
+
+    return redirect('/archived_members')
 
 @app.route("/view_member_donations/<int:member_id>")
 def get_member_donations(member_id):
     if not 'organizer_id' in session:
         return redirect("/")
-
     
     donations = Donation.get_member_donations({"member_id": member_id})
     num_donations = 0

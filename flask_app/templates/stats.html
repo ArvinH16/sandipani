@@ -80,6 +80,14 @@
             font-weight: 600;
             margin-right: 15px; /* Add some right margin to align with other elements */
         }
+        
+        .centered-text {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+        color: #333333;
+    }
     </style>
 </head>
 <body>
@@ -105,6 +113,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_events">Manage Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/archived_members">Archived Members</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/stats">Stats</a>
@@ -168,5 +179,8 @@
             </div>
         </div>
     </div>
+    <p class="centered-text">Total Members: {{ member_count[0]['member_count']  +  archived_member_count[0]['member_count'] }}</p>
+    <p class="centered-text"> Members: {{ member_count[0]['member_count'] }}</p>
+    <p class="centered-text"> Archived Members: {{ archived_member_count[0]['member_count'] }}</p>
 </body>
 </html>
