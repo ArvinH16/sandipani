@@ -82,6 +82,7 @@ def dashboard():
         all_members = Member.get_searched_members(data)
 
         session['search_results'] = [member.__dict__ for member in all_members]  # assuming each member object can be represented as a dictionary
+        
         return redirect("/search_results")
 
     else:
@@ -192,6 +193,7 @@ def archived_page():
         all_members = Member.get_searched_archived_members(data)
 
         session['search_results'] = [member.__dict__ for member in all_members]  # assuming each member object can be represented as a dictionary
+        
         return redirect("/archived_search_results")
 
     else:
@@ -205,5 +207,6 @@ def search_archived_member():
     if not 'organizer_id' in session:
         return redirect("/")
 
-    all_members = session.get('search_results', [])
-    return render_template("archived_member_dashboard.html", all_members = all_members)
+    all_archived_members = session.get('search_archived_results', [])
+    
+    return render_template("archived_member_dashboard.html", all_archived_members = all_archived_members)
