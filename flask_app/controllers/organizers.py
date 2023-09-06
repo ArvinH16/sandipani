@@ -25,7 +25,13 @@ def login():
         flash("Invalid Password", "login")
         return redirect('/')
 
+    if organizer.role == "none":
+        flash("You have successfully signed up, but awaiting organizer approval", "login")
+        return redirect('/')
+
     session['organizer_id'] = organizer.id
+    session['role'] = organizer.role
+    session['first_name'] = organizer.first_name
 
     return redirect("/main_page")
 
@@ -64,6 +70,8 @@ def dashboard():
     if not 'organizer_id' in session:
         return redirect("/")
     
+
+    print(session['role'])
     if request.method == 'POST':
         """
         data = {

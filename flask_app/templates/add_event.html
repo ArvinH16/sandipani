@@ -106,31 +106,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/main_page">Home</a>
+                    <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" >
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
+                {% if session['role'] == "admin" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_organizers">Manage Organizers</a>
                 </li>
+                {% endif %}
+
+                {% if session['role'] == "admin" or session['role'] == "donation_editor" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_events">Manage Events</a>
                 </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a class="nav-link" href="/archived_members">Archived Members</a>
                 </li>
+
+                {% if session['role'] == "admin" or session['role'] == "donation_editor" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/stats">Stats</a>
+                </li>
+                {% endif %}
                 <li class="nav-item">
                     <img class="rounded-circle mr-2"
                         src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
-                    <span class="navbar-text">Admin</span>
+                    <span class="navbar-text">{{session['first_name']}}</span>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="container">
         <h1>Creating a New Event</h1>
         <form action="/add_event" method="post">
