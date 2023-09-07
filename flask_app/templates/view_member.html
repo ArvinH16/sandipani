@@ -90,9 +90,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
+                {% if session['role'] != "member_viewer" %}
                 <li class="nav-item" >
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
+                {%endif%}
+
                 {% if session['role'] == "admin" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_organizers">Manage Organizers</a>
@@ -129,7 +132,7 @@
             <form id="deleteMemberForm" action="/delete_member" method="post">
                 <input type="hidden" name="member_id" value="{{member.id}}">
                 {% if session['role'] == "admin" or session['role'] == "donation_editor" or session['role'] == "member_editor" %}
-                <button type="submit" id="red" class="btn btn-primary">Delete member</button>
+                <button type="submit" id="red" class="btn btn-primary">Archive member</button>
                 {%endif%}
 
                 {% if session['role'] == "admin" or session['role'] == "donation_editor" %}

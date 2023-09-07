@@ -94,9 +94,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
+                {% if session['role'] != "member_viewer" %}
                 <li class="nav-item" >
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
+                {%endif%}
+
                 {% if session['role'] == "admin" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_organizers">Manage Organizers</a>
@@ -162,8 +165,9 @@
                         <p class="card-text mb-0"><small class="text-muted">Email:</small> {{member.email}}</p>
                         <p class="card-text"><small class="text-muted">City:</small> {{member.city}}</p>
                     </div>
+                    {% if session['role'] != "member_viewer" %}
                     <a href="/unarchive_member/{{ member.id }}" class="btn btn-success">Unarchive Member</a>
-
+                    {%endif%}
                 </div>
             </div>
         </div>

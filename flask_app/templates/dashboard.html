@@ -94,9 +94,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
+                {% if session['role'] != "member_viewer" %}
                 <li class="nav-item" >
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
+                {%endif%}
+
                 {% if session['role'] == "admin" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_organizers">Manage Organizers</a>
