@@ -71,7 +71,6 @@ def dashboard():
         return redirect("/")
     
 
-    print(session['role'])
     if request.method == 'POST':
         """
         data = {
@@ -111,16 +110,23 @@ def search_member():
 def manage_org_page():
     if not 'organizer_id' in session:
         return redirect("/")
+    
+    if session['role'] != "admin":
+        return redirect("/main_page")
 
     pending_organizers = Organizer.get_all_pending_organizers()
     all_organizers = Organizer.get_all_organizers()
 
     return render_template("manage_organizers.html", pending_organizers = pending_organizers, all_organizers = all_organizers)
 
+
 @app.route("/pend_org_form", methods=['POST'])
 def process_pend_org_form():
     if not 'organizer_id' in session:
         return redirect("/")
+    
+    if session['role'] != "admin":
+        return redirect("/main_page")
 
     data = {
         "id": request.form["pending_organizers_id"],
@@ -135,12 +141,16 @@ def process_pend_org_form():
         Organizer.change_role(data)
         return redirect("/manage_organizers")
     
+
 @app.route("/update_organizer", methods=['POST'])
 def update_organizer():
 
     if not 'organizer_id' in session:
         return redirect("/")
     
+    if session['role'] != "admin":
+        return redirect("/main_page")
+
     data = {
         "id": request.form["organizer_id"],
         "updated_role": request.form["role"],
@@ -165,7 +175,10 @@ def delete_organizer():
 
     if not 'organizer_id' in session:
         return redirect("/")
-    
+
+    if session['role'] != "admin":
+        return redirect("/main_page")
+
     data = {
         "id": request.form["organizer_id"],
         "first_name": request.form['organizer_first_name']
