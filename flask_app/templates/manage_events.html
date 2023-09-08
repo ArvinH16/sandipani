@@ -136,11 +136,9 @@
                 </li>
                 {% endif %}
 
-                {% if session['role'] == "admin" or session['role'] == "donation_editor" %}
                 <li class="nav-item">
                     <a class="nav-link" href="/manage_events">Manage Events</a>
                 </li>
-                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="/archived_members">Archived Members</a>
@@ -161,14 +159,18 @@
     </nav>
 
     <div class="container">
+        {% if session['role'] == "admin" or session['role'] == "donation_editor" %}
         <a href="/add_event_page" class="btn btn-primary">Add Event</a>
+        {%endif%}
 
         {% for event in all_events %}
         <div class="event-card">
             <div class="event-name">{{ event.event_name }}</div>
             <div class="event-details">{{ event.event_date }}</div>
             <div class="event-details">{{ event.description }}</div>
+            {% if session['role'] == "admin"%}
             <a id="delete_event" href="/delete_event/{{ event.id }}" class="btn btn-danger">Delete Event</a>
+            {%endif%}
         </div>
         {% endfor %}
     </div>

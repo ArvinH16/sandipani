@@ -166,18 +166,27 @@ def purge_member():
 def unarchive_member(member_id):
     if not 'organizer_id' in session:
         return redirect("/")
+    
+    if session['role'] == "member_viewer":
+        return redirect("/main_page")
+
     data = {
         'member_id': member_id
     }
+    
     Member.unarchive_member(data)
 
     return redirect('/archived_members')
+
 
 @app.route("/view_member_donations/<int:member_id>")
 def get_member_donations(member_id):
     if not 'organizer_id' in session:
         return redirect("/")
     
+    if session['role'] == "member_viewer" or session['role'] == "member_editor":
+        return redirect("/main_page")
+
     donations = Donation.get_member_donations({"member_id": member_id})
     num_donations = 0
     total_donation = 0

@@ -12,6 +12,8 @@ def render_add_donation_page(member_id):
     if not 'organizer_id' in session:
         return redirect("/")
     
+    if session['role'] == "member_viewer" or session['role'] == "member_editor":
+        return redirect("/main_page")
     data = {
         "member_id": member_id
     }
@@ -24,7 +26,10 @@ def render_add_donation_page(member_id):
 def add_donation_form():
     if not 'organizer_id' in session:
         return redirect("/")
-    
+
+    if session['role'] == "member_viewer" or session['role'] == "member_editor":
+        return redirect("/main_page")
+
     data = {
         "member_id": request.form["member_id"],
         "amount": request.form["amount"],
