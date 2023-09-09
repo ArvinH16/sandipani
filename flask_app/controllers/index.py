@@ -55,7 +55,4 @@ def render_stats():
 def logout():
 
     session.clear()
-    redirect("/")
-
-#test
-    
+    return redirect("/")
