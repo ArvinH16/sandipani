@@ -4,35 +4,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Bootstrap Example</title>
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Bootstrap Example</title>
-        <!-- load Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <!-- Optional JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-            crossorigin="anonymous"></script>
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-        <!-- Add Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-    </head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,20 +43,18 @@
             color: #007bff;
         }
 
-        .form-container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
+        @media (max-width: 768px) {
+            form.search-form {
+                flex-direction: column;
+            }
 
-        .form-group {
-            margin-bottom: 10px;
-        }
+            form.search-form button {
+                margin-top: 10px;
+            }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            font-size: 14px;
-            padding: 5px 10px;
+            .card {
+                margin: 1em 0;
+            }
         }
     </style>
 </head>
@@ -130,17 +109,37 @@
     </nav>
     
     
-
-    <div class="container my-3">
+    <!-- <div class="container my-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-between">
-                    <!-- Search Form -->
                     <form action="/archived_members" method="post" class="d-flex flex-grow-1">
                         <input class="form-control flex-grow-1 mr-2" type="search" name="query" placeholder="Search Archived Members..." aria-label="Search">
                         <button class="btn btn-outline-success mr-2" type="submit">Search</button>
                     </form>
                     
+                    <a href="/archived_members" class="btn btn-primary">Show All Archived Members</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between flex-column flex-md-row">
+                    <!-- Search Form -->
+                    <div class="d-flex flex-grow-1 mb-2 mb-md-0 mr-md-3"> <!-- Added mr-md-3 here -->
+                        <form action="/archived_members" method="post" class="d-flex flex-grow-1">
+                            <div class="input-group">
+                                <input type="search" name="query" class="form-control flex-grow-1" placeholder="Search Archived Members..." aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+    
                     <!-- Show All Members Button -->
                     <a href="/archived_members" class="btn btn-primary">Show All Archived Members</a>
                 </div>
@@ -165,14 +164,12 @@
                         <p class="card-text"><small class="text-muted">City:</small> {{member.city}}</p>
                     </div>
                     {% if session['role'] != "member_viewer" %}
-                    <a href="/unarchive_member/{{ member.id }}" class="btn btn-success">Unarchive Member</a>
+                    <a href="/unarchive_member/{{ member.id }}" class="btn btn-success d-flex justify-content-center align-items-center">Unarchive</a>
                     {%endif%}
                 </div>
             </div>
         </div>
         {% endfor %}
-
-
 
     </div>
 
