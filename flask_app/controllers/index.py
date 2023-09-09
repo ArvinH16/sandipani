@@ -50,3 +50,9 @@ def render_stats():
     print(donation_count)
 
     return render_template("stats.html", donation_sum = donation_sum, donation_count = donation_count, sale_sum = sale_sum, sale_count = sale_count, tatvadarshan_sum = tatvadarshan_sum, tatvadarshan_count = tatvadarshan_count, student_sponsorship_sum = student_sponsorship_sum, student_sponsorship_count = student_sponsorship_count, member_count = member_count, archived_member_count = archived_member_count)
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+    return redirect("/")
