@@ -56,4 +56,6 @@ def logout():
 
     session.clear()
     redirect("/")
+
+#test
     
