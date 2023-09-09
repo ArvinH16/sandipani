@@ -64,7 +64,7 @@
         }
 
         .navbar-dark .navbar-toggler-icon {
-            background-color: #fff;
+            background-color: #343a40;
         }
 
         .navbar-nav .nav-item a {
@@ -121,13 +121,14 @@
 
                 {% if session['role'] == "admin" %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/manage_organizers">Manage Organizers</a>
+                    <a class="nav-link" href="/manage_organizers">Organizers</a>
                 </li>
                 {% endif %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/manage_events">Manage Events</a>
+                    <a class="nav-link" href="/manage_events">Events</a>
                 </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="/archived_members">Archived Members</a>
