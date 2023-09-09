@@ -21,7 +21,7 @@ def main_page():
 
 @app.route("/pending_page")
 def pending_page():
-    if not 'organizer_id' in session:
+    if 'organizer_id' in session:
         return redirect("/main_page")
     
     return render_template("pending_page.html")
