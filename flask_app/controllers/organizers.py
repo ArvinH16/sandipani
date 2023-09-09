@@ -93,6 +93,7 @@ def dashboard():
         return redirect("/search_results")
 
     else:
+        session.pop('search_results', None)
         all_members = Member.get_all_members()
 
     return render_template("dashboard.html", all_members = all_members)
@@ -218,6 +219,7 @@ def archived_page():
         return redirect("/archived_search_results")
 
     else:
+        session.pop('search_results', None)
         all_archived_members = Member.get_all_archived_members()
 
     return render_template("archived_member_dashboard.html", all_archived_members = all_archived_members)

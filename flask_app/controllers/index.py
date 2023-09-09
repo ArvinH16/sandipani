@@ -23,6 +23,7 @@ def main_page():
 def pending_page():
     if 'organizer_id' in session:
         return redirect("/main_page")
+    
     return render_template("pending_page.html")
 
 

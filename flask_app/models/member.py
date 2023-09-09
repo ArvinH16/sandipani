@@ -30,7 +30,8 @@ class Member:
 
     @classmethod
     def get_all_members(cls):
-        query = "SELECT * FROM members WHERE is_deleted = 0"
+        query = "SELECT * FROM members WHERE is_deleted = 0 ORDER BY created_at DESC LIMIT 50;"
+        
         result = connectToMySQL('sandipani').query_db(query)
 
         all_member_objects = []
@@ -45,7 +46,7 @@ class Member:
 
     @classmethod
     def get_all_archived_members(cls):
-        query = "SELECT * FROM members WHERE is_deleted = 1"
+        query = "SELECT * FROM members WHERE is_deleted = 1 ORDER BY created_at DESC LIMIT 50;"
         result = connectToMySQL('sandipani').query_db(query)
 
         all_member_objects = []
@@ -61,7 +62,7 @@ class Member:
     @classmethod
     def get_searched_members(cls, data):
         #query = "SELECT * FROM members WHERE email LIKE '%a%';"
-        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0 AND is_deleted = 0;"
+        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0 AND is_deleted = 0 ORDER BY created_at DESC LIMIT 50;"
         #query = "SELECT * FROM members WHERE CHARINDEX(%(email)s, email) > 0;"
 
         result = connectToMySQL('sandipani').query_db(query, data)
@@ -77,7 +78,7 @@ class Member:
     @classmethod
     def get_searched_archived_members(cls, data):
         #query = "SELECT * FROM members WHERE email LIKE '%a%';"
-        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0 AND is_deleted = 1;"
+        query = "SELECT * FROM members WHERE LOCATE(%(email)s, email) > 0 AND is_deleted = 1 ORDER BY created_at DESC LIMIT 50;"
         #query = "SELECT * FROM members WHERE CHARINDEX(%(email)s, email) > 0;"
 
         result = connectToMySQL('sandipani').query_db(query, data)
