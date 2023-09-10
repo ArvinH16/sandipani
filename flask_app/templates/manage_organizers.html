@@ -157,80 +157,98 @@
     </nav>
     <!-- Main Content -->
     <div class="container my-4">
+
         <!-- Pending Organizers -->
-        <h3 class="mb-3">Pending Organizers</h3>
-        {%if pending_organizers|length== 0%}
-            <h6>There are currently no pending organizers</h1>
-        {%endif%}
-        {%for pending_organizer in pending_organizers%}
-        <div class="organizer-row">
-            <div class="organizer-details">
-                <p>{{pending_organizer.first_name}}</p>
-                <p>{{pending_organizer.last_name}}</p>
-                <p>{{pending_organizer.email}}</p>
-                <p>{{pending_organizer.phone_number}}</p>
-            </div>
-
-            <div class="organizer-actions">
-                <form id="pend_org_form" action="/pend_org_form" method="post" style="display: inline-block;" onsubmit="return confirmPending(this);">
-                    <input type="hidden" name="pending_organizers_id" value="{{pending_organizer.id}}">
-                    <input type="hidden" name="pending_organizers_name" value="{{pending_organizer.first_name}}">
-
-                    <select name="role">
-                        <option value="admin">Admin</option>
-                        <option value="member_viewer">Member Viewer</option>
-                        <option value="member_editor">Member Editor</option>
-                        <option value="donation_editor">Donation Editor</option>
-                    </select>
-                    <select name="decision">
-                        <option value="accept">Accept</option>
-                        <option value="deny">Deny</option>
-                    </select>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
+        <h3 class="mb-3">Pending Organizers:</h3>
+        {% if pending_organizers|length == 0 %}
+            <h6>There are currently no pending organizers</h6>
+        {% endif %}
+        <div class="accordion" id="pendingAccordion">
+            {% for pending_organizer in pending_organizers %}
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center" id="pendingHeading{{ loop.index }}">
+                        <h5 class="mb-0">
+                            {{ pending_organizer.first_name }} {{ pending_organizer.last_name }}
+                        </h5>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#pendingCollapse{{ loop.index }}" aria-expanded="true" aria-controls="pendingCollapse{{ loop.index }}">
+                            Expand
+                        </button>
+                    </div>
+    
+                    <div id="pendingCollapse{{ loop.index }}" class="collapse" aria-labelledby="pendingHeading{{ loop.index }}" data-parent="#pendingAccordion">
+                        <div class="card-body">
+                            <p>Email: {{ pending_organizer.email }}</p>
+                            <p>Phone: {{ pending_organizer.phone_number }}</p>
+                            <div class="organizer-actions">
+                                <form id="pend_org_form" action="/pend_org_form" method="post" onsubmit="return confirmPending(this);">
+                                    <input type="hidden" name="pending_organizers_id" value="{{ pending_organizer.id }}">
+                                    <input type="hidden" name="pending_organizers_name" value="{{ pending_organizer.first_name }}">
+    
+                                    <select name="role">
+                                        <option value="admin">Admin</option>
+                                        <option value="member_viewer">Member Viewer</option>
+                                        <option value="member_editor">Member Editor</option>
+                                        <option value="donation_editor">Donation Editor</option>
+                                    </select>
+                                    <select name="decision">
+                                        <option value="accept">Accept</option>
+                                        <option value="deny">Deny</option>
+                                    </select>
+                                    <input type="submit" value="Submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        {%endfor%}
+    
         <!-- All Organizers -->
-        <h3 class="mt-4 mb-3">Current Organizers</h3>
-        {% for organizer in all_organizers%}
-        <div class="organizer-row">
-            <div class="organizer-details">
-                <p>{{organizer.first_name}}</p>
-                <p>{{organizer.last_name}}</p>
-                <p>{{organizer.email}}</p>
-                <p>{{organizer.phone_number}}</p>
-            </div>
-
-            <div class="organizer-actions">
-                <form id="change_org_role" action="/update_organizer" method="post" style="display: inline-block;" onsubmit="return confirmRoleChange(this);">
-                    <input type="hidden" name="organizer_id" value="{{organizer.id}}">
-                    <input type="hidden" name="organizer_role" value="{{organizer.role}}">
-                    <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
-                    <select name="role">
-                        <option {% if organizer.role=="admin" %}selected{%endif%} value="admin">Admin</option>
-                        <option {% if organizer.role=="member_viewer" %}selected{%endif%} value="member_viewer">Member
-                            Viewer</option>
-                        <option {% if organizer.role=="member_editor" %}selected{%endif%} value="member_editor">Member
-                            Editor</option>
-                        <option {% if organizer.role=="donation_editor" %}selected{%endif%} value="donation_editor">
-                            Donation Editor</option>
-                    </select>
-                    <input type="submit" value="Submit">
-                </form>
-
-
-                <form action="/delete_organizer" method="post" style="display: inline-block;" onsubmit="return confirmDelete(this);">
-                    <input type="hidden" name="organizer_id" value="{{organizer.id}}">
-                    <input type="hidden" name="organizer_first_name" value="{{organizer.first_name}}">
-                    <button type="submit" class="btn delete-btn">Delete</button>
-                </form>
-
-
-            </div>
+        <h3 class="mt-4 mb-3">Current Organizers:</h3>
+        <div class="accordion" id="allAccordion">
+            {% for organizer in all_organizers %}
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center" id="allHeading{{ loop.index }}">
+                        <h5 class="mb-0">
+                            {{ organizer.first_name }} {{ organizer.last_name }}
+                        </h5>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#allCollapse{{ loop.index }}" aria-expanded="true" aria-controls="allCollapse{{ loop.index }}">
+                            Expand
+                        </button>
+                    </div>
+    
+                    <div id="allCollapse{{ loop.index }}" class="collapse" aria-labelledby="allHeading{{ loop.index }}" data-parent="#allAccordion">
+                        <div class="card-body">
+                            <p>Email: {{ organizer.email }}</p>
+                            <p>Phone: {{ organizer.phone_number }}</p>
+                            <div class="organizer-actions">
+                                <form id="change_org_role" action="/update_organizer" method="post" onsubmit="return confirmRoleChange(this);">
+                                    <input type="hidden" name="organizer_id" value="{{ organizer.id }}">
+                                    <input type="hidden" name="organizer_role" value="{{ organizer.role }}">
+                                    <input type="hidden" name="organizer_first_name" value="{{ organizer.first_name }}">
+                                    <select name="role">
+                                        <option {% if organizer.role == "admin" %}selected{% endif %} value="admin">Admin</option>
+                                        <option {% if organizer.role == "member_viewer" %}selected{% endif %} value="member_viewer">Member Viewer</option>
+                                        <option {% if organizer.role == "member_editor" %}selected{% endif %} value="member_editor">Member Editor</option>
+                                        <option {% if organizer.role == "donation_editor" %}selected{% endif %} value="donation_editor">Donation Editor</option>
+                                    </select>
+                                    <input type="submit" value="Submit">
+                                </form>
+    
+                                <form action="/delete_organizer" method="post" style="display: inline-block;" onsubmit="return confirmDelete(this);">
+                                    <input type="hidden" name="organizer_id" value="{{ organizer.id }}">
+                                    <input type="hidden" name="organizer_first_name" value="{{ organizer.first_name }}">
+                                    <button type="submit" class="btn delete-btn">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+    
+    
 
     <script>
         function confirmRoleChange(form) {

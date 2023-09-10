@@ -1,11 +1,12 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
+
 from flask_app.models.donation import Donation
 from flask_app.models.tatvadarshan import Tatvadarshan
 from flask_app.models.student_sponsorship import Student_Sponsorship
 from flask_app.models.sale import Sale
 from flask_app.models.member import Member
-#from flask_app.models.thought import Thought
+
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
