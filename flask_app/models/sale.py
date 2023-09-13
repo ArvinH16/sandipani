@@ -50,3 +50,17 @@ class Sale:
         result = connectToMySQL('sandipani').query_db(query)
         
         return result
+    
+    @classmethod
+    def get_member_sale_sum(cls, data):
+        query = "SELECT SUM(amount) FROM sales WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
+
+    @classmethod
+    def get_member_num_sales(cls, data):
+        query = "SELECT COUNT(*) FROM sales WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        
+        return result

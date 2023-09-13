@@ -53,3 +53,17 @@ class Student_Sponsorship:
         result = connectToMySQL('sandipani').query_db(query)
         
         return result
+
+    @classmethod
+    def get_member_student_sponsorship_sum(cls, data):
+        query = "SELECT SUM(amount) FROM student_sponsorships WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+
+        return result
+
+    @classmethod
+    def get_member_num_student_sponsorships(cls, data):
+        query = "SELECT COUNT(*) FROM student_sponsorships WHERE member_id = %(member_id)s;"
+        result = connectToMySQL('sandipani').query_db(query, data)
+        
+        return result
