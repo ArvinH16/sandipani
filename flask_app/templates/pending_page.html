@@ -1,70 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakina and Anant Dhokia -->
+<!-- This page is where the user lands when they sign up to be an organizer before they are approved -->
 <head>
-    
+    <!-- Page title displayed on the browser tab -->
     <title>Awaiting Approval</title>
+
+    <!-- Include Bootstrap 4 CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    
+
+    <!-- Include Bootstrap 4 JavaScript for interactive features -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-    
+    <!-- Include custom CSS files for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pending_page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+
+    <!-- Configure viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-        .navbar {
-            background-color: #343a40;
-        }
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
- 
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            transition: background-color 0.3s ease-in;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 70px;
-        }
-
-        p {
-            text-align: center;
-            margin-top: 25px;
-            font-size: larger;
-            flex-wrap: wrap;
-            margin-left: 125px;
-            margin-right: 125px;
-        }
-
-    </style>
 </head>
+
 
 <body>
     <!-- Navigation -->

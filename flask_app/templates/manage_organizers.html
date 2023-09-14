@@ -1,123 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This page is used for managing organizers. It can be used to look through organizers
+that have recently signed up and waiting for approval as well as active organizers and their roles. -->
 <head>
+    <!-- Character encoding and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>manage organizers</title>
+
+    <!-- Page title displayed on the browser tab -->
+    <title>Manage Organizers</title>
+
+    <!-- Include Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap 4 JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- Additional custom CSS styling for navbar -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
+    <!-- Additional custom CSS styling for this page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/manage_organizers.css') }}">
 
-    <style>
-        /* Additional Styles */
-        select {
-            font-size: 0.9em;
-            padding: 4px 8px;
-            height: auto;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-        .organizer-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #e1e1e1;
-            padding: 10px 0;
-        }
-
-        .organizer-details p {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .organizer-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .organizer-actions select,
-        .organizer-actions button,
-        .organizer-actions input[type="submit"] {
-            margin-right: 5px;
-        }
-
-
-        input[type="submit"],
-        button[type="submit"],
-        .btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-
-        button.delete-btn {
-            background-color: #dc3545;
-            color: #fff;
-            margin-left: 10px;
-        }
-
-        button[type="submit"] {
-            margin-left: 10px;
-        }
-
-
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .row>div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary a {
-            color: #fff;
-        }
-
-        .navbar {
-            background-color: #343a40;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        @media (max-width: 768px) {
-            .organizer-row {
-                flex-direction: column;
-            }
-
-            .organizer-details, .organizer-actions {
-                width: 100%;
-            }
-        }
-    </style>
-
-    <!-- Your JS functions here... -->
 </head>
+
 
 <body>
 
@@ -135,7 +51,7 @@
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
                 {% if session['role'] != "member_viewer" %}
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
                 {%endif%}
@@ -161,13 +77,13 @@
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2"
-                        src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
                     <span class="navbar-text">{{session['first_name']}}</span>
                     <a href="/logout" class="ml-2"><i class="fas fa-sign-out-alt"></i></a>
                 </li>
-                
-                
+
+
             </ul>
         </div>
     </nav>
@@ -282,30 +198,46 @@
     </div>
 
 
+    <!-- JavaScript functions for handling role changes, deletions, and pending organizer decisions -->
+<script>
+    /**
+     * Confirms a role change for an organizer.
+     * @param {HTMLFormElement} form - The form containing organizer information.
+     * @returns {boolean} - True if the admin confirms the role change, otherwise false.
+     */
+    function confirmRoleChange(form) {
+        let name = form.querySelector("[name='organizer_first_name']").value;
+        let role = form.querySelector("[name='role']").value;
+        return confirm(`Are you sure you want to change the role of ${name} to ${role}?`);
+    }
 
-    <script>
-        function confirmRoleChange(form) {
-            let name = form.querySelector("[name='organizer_first_name']").value;
-            let role = form.querySelector("[name='role']").value;
-            return confirm(`Are you sure you want to change the role of ${name} to ${role}?`);
-        }
+    /**
+     * Confirms the deletion of an organizer.
+     * @param {HTMLFormElement} form - The form containing organizer information.
+     * @returns {boolean} - True if the admin confirms the deletion, otherwise false.
+     */
+    function confirmDelete(form) {
+        let name = form.querySelector("[name='organizer_first_name']").value;
+        return confirm(`Are you certain you wish to delete ${name}? This action cannot be undone.`);
+    }
 
-        function confirmDelete(form) {
-            let name = form.querySelector("[name='organizer_first_name']").value;
-            return confirm(`Are you certain you wish to delete ${name}? This action cannot be undone.`);
+    /**
+     * Confirms a pending organizer decision (accept or deny).
+     * @param {HTMLFormElement} form - The form containing pending organizer information.
+     * @returns {boolean} - True if the admin confirms the decision, otherwise false.
+     */
+    function confirmPending(form) {
+        let name = form.querySelector("[name='pending_organizers_name']").value;
+        let decision = form.querySelector("[name='decision']").value;
+        let role = form.querySelector("[name='role']").value;
+        if (decision === "accept") {
+            return confirm(`Do you want to accept ${name} for the role of ${role}?`);
+        } else {
+            return confirm(`Are you sure you want to deny ${name}?`);
         }
+    }
+</script>
 
-        function confirmPending(form) {
-            let name = form.querySelector("[name='pending_organizers_name']").value;
-            let decision = form.querySelector("[name='decision']").value;
-            let role = form.querySelector("[name='role']").value;
-            if (decision === "accept") {
-                return confirm(`Do you want to accept ${name} for the role of ${role}?`);
-            } else {
-                return confirm(`Are you sure you want to deny ${name}?`);
-            }
-        }
-    </script>
 </body>
 
 </html>

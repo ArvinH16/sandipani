@@ -1,68 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This is where the organizer can view or edit active members within the application -->
 <head>
+    <!-- Character set and viewport settings for better compatibility -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Member</title>
+
+    <!-- Page title displayed on the browser tab -->
+    <title>View or edit Member</title>
+
+    <!-- Include Bootstrap 4 CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap 4 JavaScript for interactive features -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- Additional custom CSS for navigation styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <!-- Additional custom CSS for page-specific styling (Note: CSS filename 'view_member_donations.css' may be incorrect here) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view_member.css') }}">
 
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-
-        .navbar {
-            background-color: #343a40;
-        }
-        
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .form-row {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        #red {
-            background-color: red;
-            border-color: red;
-        }
-    </style>
-
+    <!-- JavaScript to confirm member deletion -->
     <script>
         window.onload = function () {
             var deleteForm = document.getElementById('deleteMemberForm');
@@ -76,6 +45,7 @@
         }
     </script>
 </head>
+
 
 <body>
     <!-- Navigation -->

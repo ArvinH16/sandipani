@@ -1,102 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This page is where the admin/user can manage the event such as 
+look through them or delete/add an event. -->
 <head>
+    <!-- Character encoding and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Management</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
 
+    <!-- Page title displayed on the browser tab -->
+    <title>Event Management</title>
+
+    <!-- Include Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <!--  -->
+
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-
-    <!--  -->
+    <!-- Include Bootstrap 4 JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
+    <!-- Additional custom CSS styling for navbar -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-        .container {
-            margin-top: 30px;
-        }
+    <!-- Additional custom CSS styling for this page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/manage_events.css') }}">
 
-        .btn-primary {
-            margin-bottom: 20px;
-        }
-
-        .event-card {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .event-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .event-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .event-details {
-            font-size: 1rem;
-            color: #555;
-            margin-top: 5px;
-        }
-
-        #delete_event {
-            background-color: #dc3545;
-            border-color: #dc3545;
-            color: #fff;
-            float: right;
-            margin-top: -25px;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        #delete_event:hover {
-            background-color: #c82333;
-            border-color: #c82333;
-        }
-
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-
-        .navbar {
-            background-color: #343a40;
-            margin-bottom: 30px;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-    </style>
-
+    <!-- JavaScript function to confirm event deletion -->
     <script>
         window.onload = function () {
             var deleteForm = document.getElementById('delete_event');
@@ -110,6 +46,7 @@
         }
     </script>
 </head>
+
 
 <body>
 
@@ -172,7 +109,7 @@
         {% for event in all_events %}
         <div class="event-card">
             <div class="event-name">{{ event.event_name }}</div>
-            <div class="event-details">{{ event.event_date }}</div>
+            <div class="event-details">{{ event.event_date.strftime('%m-%d-%Y') }}</div>
             <div class="event-details">{{ event.description }}</div>
             {% if session['role'] == "admin"%}
             <a id="delete_event" href="/delete_event/{{ event.id }}" class="btn btn-danger">Delete Event</a>

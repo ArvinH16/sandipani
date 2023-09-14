@@ -1,66 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This page is where archived members are shown. It is a dashboard page where memebers which
+are archived can be looked through and searched -->
 
 
 <head>
+    <!-- Character encoding and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Bootstrap Example</title>
+    
+    <!-- Page title displayed on the browser tab -->
+    <title>Archived members dashboard</title>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include jQuery library (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Bootstrap 4 -->
+    <!-- Include Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include Bootstrap 4 JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- Include custom CSS file for archived member dashboard -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/archived_member_dashboard.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-
-        .navbar {
-            background-color: #343a40;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        @media (max-width: 768px) {
-            form.search-form {
-                flex-direction: column;
-            }
-
-            form.search-form button {
-                margin-top: 10px;
-            }
-
-            .card {
-                margin: 1em 0;
-            }
-        }
-    </style>
+    <!-- Include custom CSS file for navigation bar styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 </head>
+
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">

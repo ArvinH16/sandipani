@@ -1,113 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This is where organizers can view the global stats such as
+total number of donations and the sum of the donations and etc. -->
 <head>
+    <!-- Character set and viewport settings for better compatibility -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandipani - Stats</title>
+
+    <!-- Page title displayed on the browser tab -->
+    <title>Global stats page</title>
+
+    <!-- Include Bootstrap 4 CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap 4 JavaScript for interactive features -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- Additional custom CSS for navigation styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .col-md-6 {
-            flex-basis: 48%;
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .section h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #333333;
-        }
-
-        .number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #007bff;
-        }
-
-        .total-amount {
-            font-size: 18px;
-            color: #888888;
-        }
-
-        .navbar {
-            background-color: #343a40;
-            margin-bottom: 30px;
-            /* To match spacing in the original example */
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            /* padding: 15px 20px; Adjust padding for the navbar links */
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        /* .navbar-text {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            margin-right: 15px; /* Add some right margin to align with other elements */
-        /* } */
-
-        .centered-text {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #333333;
-        }
-
-        @media (max-width: 767px) {
-            .row {
-                justify-content: center;
-            }
-        }
-        .col-12 {
-            background-color: #ffffff;
-            border-right-color: black;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-        }
-    </style>
+    <!-- Additional custom CSS for page-specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}">
 </head>
+
 
 <body>
     <!-- Navigation -->
