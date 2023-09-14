@@ -1,5 +1,7 @@
 body {
     font-family: Arial, sans-serif;
+    padding-top: 120px; /* slightly more than the navbar height to ensure a small gap */
+
 }
 
 .row>div {

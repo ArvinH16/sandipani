@@ -3,6 +3,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
+    padding-top: 120px; /* slightly more than the navbar height to ensure a small gap */
+
 }
 
 .container {
