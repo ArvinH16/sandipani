@@ -1,11 +1,14 @@
-from flask_app.config.mysqlconnection import connectToMySQL
-#from flask_app.models import thought
-from flask import flash
-import re
+"""
+Anant Dhokia & Arvin Hakakian
 
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+This file contains the Tatvadarshan class and all functions related to
+processing tatvadarshan data for members.
+"""
+from flask_app.config.mysqlconnection import connectToMySQL
+
 
 class Tatvadarshan:
+    # Initializes tatvadarshan object given form data and commits it to memory
     def __init__(self, data):
         self.id = data['id']
         self.amount = data['amount']
@@ -20,6 +23,7 @@ class Tatvadarshan:
         self.member_creator = None
 
     @classmethod
+    # Inserts a tatvadarshan entry into the tatvadarshans table in sql database.
     def create_tatvadarshan(cls, data):
         query = "INSERT INTO tatvadarshans(amount, date, method, `length`, expiry_date, notes, member_id) VALUES (%(amount)s, %(date)s, %(method)s, %(length)s, %(expiry_date)s, %(notes)s, %(member_id)s);"
         result = connectToMySQL('sandipani').query_db(query, data)
@@ -27,12 +31,14 @@ class Tatvadarshan:
         return result
 
     @classmethod
+    # Deletes all of a member's tatvadarshans from the database given the member's id.
     def delete_member_tatvadarshans(cls, data):
         query = "DELETE FROM tatvadarshans WHERE member_id = %(member_id)s;"
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result
-    
+
+    # Given a member id, returns all the member's tatvadarshans that are in the database.
     @classmethod
     def get_member_tatvadarshans(cls, data):
         query = "SELECT * FROM tatvadarshans WHERE member_id = %(member_id)s;"
@@ -40,6 +46,7 @@ class Tatvadarshan:
 
         return result
 
+    # Sums up all the tatvadarshan amounts from every tatvadarshan entered in the database.
     @classmethod
     def get_tatvadarshan_sum(cls):
         query = "SELECT SUM(amount) AS total_amount FROM tatvadarshans;"
@@ -47,6 +54,7 @@ class Tatvadarshan:
 
         return result
     
+    # Returns the number of tatvadarshans that are in the database.
     @classmethod
     def get_num_tatvadarshans(cls):
         query = "SELECT COUNT(*) AS donation_count FROM tatvadarshans;"
@@ -54,6 +62,7 @@ class Tatvadarshan:
         
         return result
     
+    # Finds the sum of all the tatvadarshan amounts from every tatvadarshan given a member id.
     @classmethod
     def get_member_tatvadarshan_sum(cls, data):
         query = "SELECT SUM(amount) FROM tatvadarshans WHERE member_id = %(member_id)s;"
@@ -61,6 +70,7 @@ class Tatvadarshan:
 
         return result
 
+    # Returns the number of tatvadarshans that are made by a member given member id.
     @classmethod
     def get_member_num_tatvadarshans(cls, data):
         query = "SELECT COUNT(*) FROM tatvadarshans WHERE member_id = %(member_id)s;"

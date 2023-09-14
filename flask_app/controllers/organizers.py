@@ -81,17 +81,21 @@ def add_organizer():
 
     return redirect("/pending_page")
 
-# This route retrieves all data necessary to render the dashboard
-# page where organizers can see all members listed and search for
-# members.
+# This route retrieves all data necessary to render the dashboard page where organizers can see all members listed and search for members.
+# This route serves as a universal handler for user member searches. It employs both GET and POST methods
+# to distinguish between scenarios. When invoked as a POST request, it triggers a specific conditional statement
+# that executes a distinct method to retrieve search results. In contrast, when invoked as a GET request in other
+# scenarios, it utilizes a different method to fetch the 50 most recently created members. When the POST method is used,
+# the search results are stored in a session for subsequent display in the search results tab. On the other hand,
+# when the GET method is employed, a specific session for search results is deleted to free up memory.
 @app.route("/main_page", methods=['GET', 'POST'])
 def dashboard():
     
-    # Ensures user is logged in (all routes in this page contain this code)
-    if not 'organizer_id' in session:
+    # Verifies that the user is logged in (this authentication check is present in all routes on this page)
+    if 'organizer_id' not in session:
         return redirect("/")
     
-    # Searching members algorithim and saves data to session
+    # Implements the member search algorithm and stores the data in the session
     if request.method == 'POST':
         search_email = request.form['query']
         data = {
@@ -106,21 +110,20 @@ def dashboard():
         session.pop('search_results', None)
         all_members = Member.get_all_members()
 
-    return render_template("dashboard.html", all_members = all_members)
+    return render_template("dashboard.html", all_members=all_members)
 
-# Route runs when an organizer searches for an email.
-# Gathers search results from session and displays them on a 
-# template.
+# This route is invoked when an organizer searches for a member using their email.
+# It retrieves search results from the session and presents them on a template.
 @app.route("/search_results")
 def search_member():
-    if not 'organizer_id' in session:
+    if 'organizer_id' not in session:
         return redirect("/")
 
     all_members = session.get('search_results', [])
-    return render_template("dashboard.html", all_members = all_members)
+    return render_template("dashboard.html", all_members=all_members)
     
-# This route gathers all organizer data to display for admins
-# to manage organizer data.
+# This route collects all organizer data to provide administrators with the means
+# to manage organizer information.
 @app.route("/manage_organizers")
 def manage_org_page():
 
