@@ -1,39 +1,23 @@
-/* The main index page */
-
-* {
-    padding: 0px;
-    margin: 0px;
+.navbar-brand {
+    font-size: 1.5em;
 }
 
-/* Nav styling */
-.nav {
-    background-color: orange;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+.navbar {
+    background-color: #343a40;
 }
 
-/* the list in the nav for the items in the nav such as home and login etc */
-#ul {
-    display: flex;
-    list-style: none;
-    font-weight: bold;
+.navbar-dark .navbar-toggler-icon {
+    background-color: #343a40;
 }
 
-/* Each item in the list in the nav */
-#list_item {
-    margin: 0px 10px;
+.navbar-nav .nav-item a {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    transition: color 0.3s ease-in;
 }
 
-#list_item > a {
-    text-decoration: none;
-    color: black;
-}
-
-/* for pfp */
-
-#pfp {
-    width: 20px;
-    height: 20px;
+.navbar-nav .nav-item a:hover {
+    color: #007bff;
 }
 

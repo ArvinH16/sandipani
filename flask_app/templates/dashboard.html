@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This is the main dashboard page and the home page of the application. -->
+<!-- This is where the user can see all active members -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Bootstrap Example</title>
+    <title>Dashboard page</title>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -13,52 +15,17 @@
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- For icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- Additional custom css styling for navbar-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
+    <!-- Additional custom css styling for this page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
-        .navbar-brand {
-            font-size: 1.5em;
-        }
 
-        .navbar {
-            background-color: #343a40;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        @media (max-width: 768px) {
-            form.search-form {
-                flex-direction: column;
-            }
-
-            form.search-form button {
-                margin-top: 10px;
-            }
-
-            .card {
-                margin: 1em 0;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -75,6 +42,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
+                <!-- Some navbar items should be visible based on the user's access level and role -->
+                <!-- These lines ensure un-authorized user can't access certain pages. -->
+                <!-- There is more security within the controller files as well to ensure pages can't be accessed by searching in the url as well. -->
                 {% if session['role'] != "member_viewer" %}
                 <li class="nav-item" >
                     <a class="nav-link" href="/new_member">Add Member</a>
@@ -141,6 +111,7 @@
     
 
     <div class="container mt-3">
+        <!-- Looping through members to display them -->
         {% for member in all_members %}
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
@@ -156,6 +127,7 @@
                     </div>
 
                     <!-- Add Donation Button -->
+                    <!-- Button to add donation only available to authorized users with the correct role -->
                     {% if session['role'] == "admin" or session['role'] == "donation_editor" %}
                     <button class="btn btn-success" type="button" data-toggle="collapse"
                         data-target="#donationOptions{{ member.id }}" aria-expanded="false"

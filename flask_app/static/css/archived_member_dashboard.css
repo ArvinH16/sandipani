@@ -4,7 +4,6 @@ body {
 }
 
 
-
 @media (max-width: 768px) {
     form.search-form {
         flex-direction: column;

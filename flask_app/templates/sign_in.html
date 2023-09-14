@@ -1,70 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- The root page of the app where the organizer can sign in -->
+
 <head>
-    <title>Add Member</title>
+    <title>Sign in Page</title>
+
+    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery and Popper.js for Bootstrap functionality -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Additional custom CSS for navigation -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-        .navbar {
-            background-color: #343a40;
-        }
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-        .form-container {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            font-size: 14px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            transition: background-color 0.3s ease-in;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <!-- Additional custom CSS for the page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sign_in.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">
             <img src="{{url_for('static', filename='assets/sandipani_logo.png')}}" width="150" height="70" alt="Logo">
@@ -75,6 +40,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                <!-- Navigation item for Sign Up -->
                 <li class="nav-item">
                     <a class="nav-link" href="/sign_up">Sign up</a>
                 </li>
@@ -82,28 +48,33 @@
         </div>
     </nav>
 
-    <!-- Form -->
+    <!-- Sign-In Form -->
     <div class="container my-4 form-container">
         <h2 class="text-center">Welcome to Sandipani!</h2>
         <p class="text-center">Please Sign in below:</p>
         <form action="/organizer_login" method="post">
+            <!-- Display Flash Messages (if any) -->
             {% with messages = get_flashed_messages(category_filter=['login']) %}
-            {% if messages %}
-                {% for message in messages %}
-                <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
             {% endwith %}
+            <!-- Email Input Field -->
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
+            <!-- Password Input Field -->
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
+            <!-- Sign-In Button -->
             <button type="submit" class="btn btn-primary btn-block">Sign in</button>
         </form>
     </div>
 </body>
+
 </html>

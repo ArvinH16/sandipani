@@ -1,68 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This is the page where the organizer can edit or view an archived member -->
 <head>
+    <!-- Character set and viewport settings for better compatibility -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Member</title>
+
+    <!-- Page title displayed on the browser tab -->
+    <title>View or Edit archived Member</title>
+
+    <!-- Include Bootstrap 4 CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap 4 JavaScript for interactive features -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <!-- Additional custom CSS for navigation styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <!-- Additional custom CSS for page-specific styling  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view_archived_member.css') }}">
 
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-
-        .navbar {
-            background-color: #343a40;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .form-row {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        #red {
-            background-color: red;
-            border-color: red;
-        }
-    </style>
-
+    <!-- JavaScript function for handling member deletion confirmation -->
     <script>
         window.onload = function () {
             var deleteForm = document.getElementById('deleteMemberForm');
@@ -76,6 +45,7 @@
         }
     </script>
 </head>
+
 
 <body>
     <!-- Navigation -->
@@ -93,7 +63,7 @@
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
                 {% if session['role'] != "member_viewer" %}
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
                 {%endif%}
@@ -119,13 +89,13 @@
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2"
-                        src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
                     <span class="navbar-text">{{session['first_name']}}</span>
                     <a href="/logout" class="ml-2"><i class="fas fa-sign-out-alt"></i></a>
                 </li>
-                
-                
+
+
             </ul>
         </div>
     </nav>
@@ -146,11 +116,12 @@
 
         <form action="/edit_member" method="post">
             <input type="hidden" name="member_id" value="{{member.id}}">
-            
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="first_name">First name:</label>
-                    <input type="text" class="form-control" name="first_name" value="{{member.first_name}}" required readonly>
+                    <input type="text" class="form-control" name="first_name" value="{{member.first_name}}" required
+                        readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="middle_name">Middle Name:</label>
@@ -158,10 +129,11 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control" name="last_name" value="{{member.last_name}}" required readonly>
+                    <input type="text" class="form-control" name="last_name" value="{{member.last_name}}" required
+                        readonly>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="email">Email:</label>
@@ -176,7 +148,7 @@
                     <input type="text" class="form-control" name="phone_2" value="{{member.phone_2}}" readonly>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street_1">Street 1:</label>
@@ -187,7 +159,7 @@
                     <input type="text" class="form-control" name="street_2" value="{{member.street_2}}" readonly>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="city">City:</label>
@@ -202,7 +174,7 @@
                     <input type="text" class="form-control" name="zip" value="{{member.zip}}" readonly>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="country">Country:</label>
@@ -213,7 +185,7 @@
                     <input type="text" class="form-control" name="children" value="{{member.children}}" readonly>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="spouse">Spouse:</label>
@@ -224,7 +196,7 @@
                     <input type="text" class="form-control" name="parents" value="{{member.parents}}" readonly>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="notes">Notes:</label>
@@ -234,16 +206,17 @@
                     <label for="email_list">Email list:</label>
                     <div class="d-flex flex-wrap">
                         {%for email_list in email_lists%}
-                            <div class="form-check mr-3">
-                                <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}" {%if email_list.id in email_list_ids%}checked{%endif%} disabled>
-                                <label class="form-check-label" for="email_list">{{email_list.type}}</label>
-                            </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="email_list" value="{{email_list.id}}"
+                                {%if email_list.id in email_list_ids%}checked{%endif%} disabled>
+                            <label class="form-check-label" for="email_list">{{email_list.type}}</label>
+                        </div>
                         {%endfor%}
                     </div>
                 </div>
             </div>
         </form>
-        
+
     </div>
 </body>
 

@@ -94,7 +94,7 @@ class Member:
     def add_member(cls, data):
         #Add admin id from session later when we protect pages
         #add email list when fixed
-        query = "INSERT INTO members (first_name, middle_name, last_name, email, spouse, parents, children, street_1, street_2, city, state, zip, country, phone_1, phone_2, notes, organizer_id) VALUES (%(first_name)s, %(middle_name)s, %(last_name)s, %(email)s, %(spouse)s, %(parents)s, %(children)s, %(street_1)s, %(street_2)s, %(city)s, %(state)s, %(zip)s, %(country)s, %(phone_1)s, %(phone_2)s, %(notes)s, 2);"
+        query = "INSERT INTO members (first_name, middle_name, last_name, email, spouse, parents, children, street_1, street_2, city, state, zip, country, phone_1, phone_2, notes) VALUES (%(first_name)s, %(middle_name)s, %(last_name)s, %(email)s, %(spouse)s, %(parents)s, %(children)s, %(street_1)s, %(street_2)s, %(city)s, %(state)s, %(zip)s, %(country)s, %(phone_1)s, %(phone_2)s, %(notes)s);"
         result = connectToMySQL('sandipani').query_db(query, data)
 
         return result

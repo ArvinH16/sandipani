@@ -1,102 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Anant Dhokia and Arvin Hakakian -->
+<!-- This is page for adding donation for a member. The same page is used for adding different types of donations
+such as normal donation, tatvadarshan, student sponsorships and sales. The type of donation is passed in from the controlller
+based on the type of donation the user clicks on. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Donation</title>
     
     <!-- Include Bootstrap CSS -->
+    <!-- Link to Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <!-- Include jQuery -->
+    <!-- Link to jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Bootstrap JS -->
+    <!-- Link to Bootstrap 4 JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome Icons -->
+    <!-- Link to Font Awesome CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- Include custom CSS files for styling -->
+    <!-- Link to custom CSS file for add_donation page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_donation.css') }}">
     
-
-    
-    <!-- Add your own CSS -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-
-        .navbar {
-            background-color: #343a40;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-
-        .container {
-            margin-top: 40px;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-        }
-
-        input[type="submit"] {
-            display: block;
-            width: 100%;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        
-        .nav-item-style {
-            font-size: 18px;
-            font-weight: 800;
-            color: white;
-            transition: color 0.3s ease-in;
-        }
-    </style>
+    <!-- Link to custom CSS file for navigation bar -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 </head>
 
 <body>
@@ -113,6 +47,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
+                <!-- Some navbar items should be visible based on the user's access level and role -->
+                <!-- These lines ensure un-authorized user can't access certain pages. -->
+                <!-- There is more security within the controller files as well to ensure pages can't be accessed by searching in the url as well. -->
                 {% if session['role'] != "member_viewer" %}
                 <li class="nav-item" >
                     <a class="nav-link" href="/new_member">Add Member</a>
@@ -152,6 +89,11 @@
     </nav>
 
     <div class="container">
+        <!-- There are couple different type of donations that can be added for every member -->
+        <!-- Instead of creating a new page for every different type of donation, 
+        we recycle the same page for every donation type, but based on what type of donation it is
+        we show different information and a different form. The type of donation is passed in from the 
+        controller in a variable called "donation_type". -->
         {% if donation_type == "tatvadarshan" %}
         <h1>Adding Tatvadarshan for {{ member.first_name }}</h1>
         <form action="/add_donation/tatvadarshan" method="post">

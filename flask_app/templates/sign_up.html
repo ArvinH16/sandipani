@@ -1,68 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Arvin Hakakian and Anant Dhokia -->
+<!-- This is where users can sign up to be an organizer -->
 <head>
+    <!-- Page title displayed on the browser tab -->
     <title>Sign Up</title>
+
+    <!-- Include Bootstrap 4 CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include jQuery library for Bootstrap's JavaScript plugins -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Include Popper.js for Bootstrap's JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap 4 JavaScript for interactive features -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include Font Awesome Icons CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Additional custom CSS for navigation styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .navbar-brand {
-            font-size: 1.5em;
-        }
-        .navbar {
-            background-color: #343a40;
-        }
-        .navbar-dark .navbar-toggler-icon {
-            background-color: #343a40;
-        }
-        .navbar-nav .nav-item a {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease-in;
-        }
-        .navbar-nav .nav-item a:hover {
-            color: #007bff;
-        }
-        .form-container {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            font-size: 14px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            transition: background-color 0.3s ease-in;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <!-- Additional custom CSS for the page-specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sign_up.css') }}">
+
+    <!-- Configure viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -89,9 +58,9 @@
         <form action="/organizer_sign_up" method="post">
             {% with messages = get_flashed_messages(category_filter=['sign_up']) %}
             {% if messages %}
-                {% for message in messages %}
-                <p>{{ message }}</p>
-                {% endfor %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
             {% endif %}
             {% endwith %}
             <div class="form-group">
@@ -126,4 +95,5 @@
         </form>
     </div>
 </body>
+
 </html>
