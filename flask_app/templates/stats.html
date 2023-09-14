@@ -50,7 +50,7 @@ total number of donations and the sum of the donations and etc. -->
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
                 {% if session['role'] != "member_viewer" %}
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
                 {%endif%}
@@ -76,13 +76,13 @@ total number of donations and the sum of the donations and etc. -->
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2"
-                        src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
                     <span class="navbar-text">{{session['first_name']}}</span>
                     <a href="/logout" class="ml-2"><i class="fas fa-sign-out-alt"></i></a>
                 </li>
-                
-                
+
+
             </ul>
         </div>
     </nav>
@@ -90,10 +90,10 @@ total number of donations and the sum of the donations and etc. -->
     <!-- Donation Dashboard -->
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Donations:</h1>
-                    <p>Number of Donations: <span class="number">{{donation_count[0]['donation_count']}}</span></p>                    
+                    <p>Number of Donations: <span class="number">{{donation_count[0]['donation_count']}}</span></p>
                     {% if donation_sum[0]['total_amount'] == None %}
                     <p class="total-amount">Total Donation Amount: $0.00</p>
                     {%else%}
@@ -101,10 +101,11 @@ total number of donations and the sum of the donations and etc. -->
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Tatvadarshans:</h1>
-                    <p>Number of Tatvadarshans: <span class="number">{{tatvadarshan_count[0]['donation_count']}}</span></p>                    
+                    <p>Number of Tatvadarshans: <span class="number">{{tatvadarshan_count[0]['donation_count']}}</span>
+                    </p>
                     {% if tatvadarshan_sum[0]['total_amount'] == None %}
                     <p class="total-amount">Total Tatvadarshan Amount: $0.00</p>
                     {%else%}
@@ -114,21 +115,23 @@ total number of donations and the sum of the donations and etc. -->
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Student Sponsorships:</h1>
-                    <p>Number of Student Sponsorships: <span class="number">{{student_sponsorship_count[0]['donation_count']}}</span></p>                    
+                    <p>Number of Student Sponsorships: <span
+                            class="number">{{student_sponsorship_count[0]['donation_count']}}</span></p>
                     {% if student_sponsorship_sum[0]['total_amount'] == None %}
                     <p class="total-amount">Total Student Sponsorship Amount: $0.00</p>
                     {%else%}
-                    <p class="total-amount">Total Student Sponsorship Amount: ${{student_sponsorship_sum[0]['total_amount']}}</p>
+                    <p class="total-amount">Total Student Sponsorship Amount:
+                        ${{student_sponsorship_sum[0]['total_amount']}}</p>
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Sales:</h1>
-                    <p>Number of Sales: <span class="number">{{sale_count[0]['donation_count']}}</span></p>                    
+                    <p>Number of Sales: <span class="number">{{sale_count[0]['donation_count']}}</span></p>
                     {% if sale_sum[0]['total_amount'] == None %}
                     <p class="total-amount">Total Sale Amount: $0.00</p>
                     {%else%}
@@ -138,8 +141,10 @@ total number of donations and the sum of the donations and etc. -->
             </div>
         </div>
     </div>
-    <p class="centered-text">Total Members: {{ member_count[0]['member_count']  +  archived_member_count[0]['member_count'] }}</p>
+    <p class="centered-text">Total Members: {{ member_count[0]['member_count'] +
+        archived_member_count[0]['member_count'] }}</p>
     <p class="centered-text"> Members: {{ member_count[0]['member_count'] }}</p>
     <p class="centered-text"> Archived Members: {{ archived_member_count[0]['member_count'] }}</p>
 </body>
+
 </html>

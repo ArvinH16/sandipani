@@ -49,7 +49,7 @@
                     <a class="nav-link" href="/main_page">Dashboard</a>
                 </li>
                 {% if session['role'] != "member_viewer" %}
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a class="nav-link" href="/new_member">Add Member</a>
                 </li>
                 {%endif%}
@@ -75,36 +75,32 @@
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <img class="rounded-circle mr-2"
-                        src="{{ url_for('static', filename='assets/user.png') }}" width="30" height="30">
+                    <img class="rounded-circle mr-2" src="{{ url_for('static', filename='assets/user.png') }}"
+                        width="30" height="30">
                     <span class="navbar-text">{{session['first_name']}}</span>
                     <a href="/logout" class="ml-2"><i class="fas fa-sign-out-alt"></i></a>
                 </li>
-                
-                
             </ul>
         </div>
     </nav>
 
     <!-- Donation Dashboard -->
     <div class="container">
-        <div class="row no-flex-align">
-            <!-- ... -->
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Donations</h1>
-                    <p>Number of Donations: <span class="number">{{num_donations}}</span></p>
-                    <p class="total-amount">Total Donation Amount: ${{total_donation}}</p>
-
+                    <p>Number of Donations: <span class="number">{{num_donations[0]['COUNT(*)']}}</span></p>
+                    <p class="total-amount">Total Donation Amount: ${{total_donation[0]['SUM(amount)']}}</p>
                     <!-- Add button for collapsing content -->
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#donationsCollapse"
                         aria-expanded="false" aria-controls="donationsCollapse">
                         <i class="fas fa-angle-down"></i>
                     </button>
-
                     <!-- Collapsible content -->
                     <div class="collapse" id="donationsCollapse">
                         <div class="card card-body">
+                            <!-- Donations content -->
                             {%for donation in donations%}
                             <p><strong>Amount:</strong> {{donation.amount}}</p>
                             <p><strong>Method:</strong> {{donation.method}}</p>
@@ -117,23 +113,21 @@
                     </div>
                 </div>
             </div>
-            <!-- ... -->
 
-            <div class="col-md-6">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Tatvadarshans</h1>
-                    <p>Number of Tatvadarshans: <span class="number">{{num_tatvadarshans}}</span></p>
-                    <p class="total-amount">Total Tatvadarshan Amount: ${{total_tatvadarshans}}</p>
-
+                    <p>Number of Tatvadarshans: <span class="number">{{num_tatvadarshans[0]['COUNT(*)']}}</span></p>
+                    <p class="total-amount">Total Tatvadarshan Amount: ${{total_tatvadarshan[0]['SUM(amount)']}}</p>
                     <!-- Add button for collapsing content -->
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#tatCollapse"
                         aria-expanded="false" aria-controls="tatCollapse">
                         <i class="fas fa-angle-down"></i>
                     </button>
-
                     <!-- Collapsible content -->
                     <div class="collapse" id="tatCollapse">
                         <div class="card card-body">
+                            <!-- Tatvadarshans content -->
                             {%for tatvadarshan in tatvadarshans%}
                             <p><strong>Amount:</strong> {{tatvadarshan.amount}}</p>
                             <p><strong>Method:</strong> {{tatvadarshan.method}}</p>
@@ -148,22 +142,24 @@
                 </div>
             </div>
         </div>
-        <div class="row no-flex-align">
-            <div class="col-md-6">
+
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-4">
                 <div class="section">
                     <h1>Student Sponsorships</h1>
-                    <p>Number of Student Sponsorships: <span class="number">{{num_student_sponsorships}}</span></p>
-                    <p class="total-amount">Total Student Sponsorship Amount: ${{total_student_sponsorship}}</p>
-
+                    <p>Number of Student Sponsorships: <span
+                            class="number">{{num_student_sponsorships[0]['COUNT(*)']}}</span></p>
+                    <p class="total-amount">Total Student Sponsorship Amount:
+                        ${{total_student_sponsorship[0]['SUM(amount)']}}</p>
                     <!-- Add button for collapsing content -->
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ssCollapse"
                         aria-expanded="false" aria-controls="ssCollapse">
                         <i class="fas fa-angle-down"></i>
                     </button>
-
                     <!-- Collapsible content -->
                     <div class="collapse" id="ssCollapse">
                         <div class="card card-body">
+                            <!-- Student Sponsorships content -->
                             {%for student_sponsorship in student_sponsorships%}
                             <p><strong>Amount:</strong> {{student_sponsorship.amount}}</p>
                             <p><strong>Method:</strong> {{student_sponsorship.method}}</p>
@@ -177,29 +173,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="section">
-                    <h1>Donations</h1>
-                    <p>Number of Sales: <span class="number">{{num_sales}}</span></p>
-                    <p class="total-amount">Total Sales Amount: ${{total_sales}}</p>
 
+            <div class="col-12 col-lg-6 mb-4">
+                <div class="section">
+                    <h1>Sales</h1>
+                    <p>Number of Sales: <span class="number">{{num_sales[0]['COUNT(*)']}}</span></p>
+                    <p class="total-amount">Total Sales Amount: ${{total_sale[0]['SUM(amount)']}}</p>
                     <!-- Add button for collapsing content -->
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#salesCollapse"
                         aria-expanded="false" aria-controls="salesCollapse">
                         <i class="fas fa-angle-down"></i>
                     </button>
-
                     <!-- Collapsible content -->
                     <div class="collapse" id="salesCollapse">
                         <div class="card card-body">
-                            {%for donation in donations%}
-                            <p><strong>Amount:</strong> {{donation.amount}}</p>
-                            <p><strong>Method:</strong> {{donation.method}}</p>
-                            <p><strong>Date:</strong> {{donation.date}}</p>
-                            <p><strong>Event:</strong> {{donation.event}}</p>
-                            <p><strong>Notes:</strong> {{donation.notes}}</p>
-                            <p><strong>Date:</strong> {{donation.date}}</p>
-                            <hr> <!-- Divider for each donation -->
+                            <!-- Sales content -->
+                            {%for sale in sales%}
+                            <p><strong>Amount:</strong> {{sale.amount}}</p>
+                            <p><strong>Method:</strong> {{sale.method}}</p>
+                            <p><strong>Date:</strong> {{sale.date}}</p>
+                            <p><strong>Event:</strong> {{sale.event}}</p>
+                            <p><strong>Notes:</strong> {{sale.notes}}</p>
+                            <hr> <!-- Divider for each sale -->
                             {%endfor%}
                         </div>
                     </div>
