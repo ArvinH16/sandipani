@@ -115,8 +115,8 @@ based on the type of donation the user clicks on. -->
             </div>
 
             <div class="form-group">
-                <label for="length">Length (enter a number):</label>
-                <input type="text" name="length" required>
+                <label for="length">Length in months (enter a number):</label>
+                <input type="text" name="length" pattern="\d*" title="Only input a number WITHOUT any letters." required oninvalid="setCustomValidity('Only input a number WITHOUT any letters.')" onchange="try{setCustomValidity('')}catch(e){}">
             </div>
 
             <div class="form-group">
@@ -156,10 +156,10 @@ based on the type of donation the user clicks on. -->
             </div>
 
             <div class="form-group">
-                <label for="length">Length (enter a number):</label>
-                <input type="text" name="length" required>
+                <label for="length">Length in months (enter a number):</label>
+                <input type="text" name="length" pattern="\d*" title="Only input a number WITHOUT any letters." required oninvalid="setCustomValidity('Only input a number WITHOUT any letters.')" onchange="try{setCustomValidity('')}catch(e){}">
             </div>
-
+            
             <div class="form-group">
                 <label for="expiry_date">Expiry date:</label>
                 <input type="date" name="expiry_date" required>

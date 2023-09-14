@@ -2,9 +2,17 @@
     font-size: 1.5em;
 }
 
+/* .navbar {
+    background-color: #343a40;
+} */
 .navbar {
     background-color: #343a40;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures the navbar stays on top of other content */
 }
+
 
 .navbar-dark .navbar-toggler-icon {
     background-color: #343a40;
