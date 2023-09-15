@@ -1,1 +1,18 @@
-# This web application serves to provide a service for the non-profit organization, sandipani, to help them manage members and other critical information about their organization. The app not only allows them to add and edit members to keep track of all patreons, but also allows them to record donation infromation to keep track of donations, and other funds such as sales and sponsorships. The app is designed to also keep track of different events run by the organization. They can also record event names and dates to keep track of their records within the app as well. The app is run by organizers who have different roles allowing them to do different things. Certain roles can only manage members, while some can view money related info. Organizers can sign up through the app, and are approved for use of the app by an admin (the highest privilaged role) who assigns them a role and either accepts or denies them. Once an organizer is approved, they are free to access the app! We hope Sandipani can benefit with the use of this app and we can help enable them to benefit the community even more!
+## Sandipani Web Application
+
+This web application is designed to provide services for the non-profit organization, Sandipani. It aims to streamline the management of members, donations, events, and other critical information about the organization.
+
+### Features
+
+- **Member Management**: Easily add, edit, and track all patrons.
+- **Donation Tracking**: Record donation information to keep an eye on donations, sales, sponsorships, and other funds.
+- **Event Management**: Keep track of different events run by the organization, including event names and dates.
+- **Role-Based Access**: Organizers have different roles, determining their access and capabilities within the app. Some roles focus on member management, while others can view financial details.
+
+### User Registration
+
+Organizers can sign up through the app. Their access is granted by an admin, the highest privileged role. The admin assigns roles and either accepts or denies the organizer's application. Once approved, organizers can fully access the app's features.
+
+### Conclusion
+
+We hope Sandipani can greatly benefit from this app, enabling them to further benefit the community.
